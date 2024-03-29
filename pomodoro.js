@@ -5,6 +5,8 @@ function pad(number) {
 
 let number = document.getElementById("number");
 
+
+
 let time = {
   hours: 0,
   minutes: 0,
@@ -67,3 +69,6 @@ let startButton = document.getElementById("startButton");
 stopButton.addEventListener("click", () => {
   time.start();
 });
+
+
+
