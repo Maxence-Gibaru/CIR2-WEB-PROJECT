@@ -10,6 +10,21 @@
         display: flex;
         justify-content: center;
       }
+
+      .task {
+        width: 100%;
+        text-align: center;
+        background-color: red;
+      }
+
+      .task > div {
+        color: blue;
+      }
+
+      .task > button {
+        color: black;
+        text-align: right;
+      }
     </style>
   </head>
   <body>
@@ -17,15 +32,8 @@
     <button id="stopButton">STOP</button>
     <button id="startButton">START</button>
 
-    <div class="wrapper-task">
-      <div id="task">
-        1
-        <!-- <div id="task-name">BOUGE</div>
-        <div class="task-date"></div>
-        <button id="task-modify">MOD</button>
-        <button class="task-delete">DEL</button> -->
-      </div>
-      <button class="adder-task">add A task</button>
+    <div id="wrapper-task">
+      <button id="adder-task">add a task</button>
     </div>
     <script src="pomodoro.js"></script>
     <script src="task.js"></script>
