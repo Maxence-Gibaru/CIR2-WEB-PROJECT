@@ -1,16 +1,10 @@
-let myTask = document.getElementById("task");
-var myTaskText = document.getElementById("task-name");
-let buttonModifyTask = document.getElementById("task-modify");
+let wrapperTask = document.getElementById("wrapper-task");
 
-let task = {
-  taskName: "defaultName",
-  taskDate
+let addTaskButton = document.getElementById("adder-task");
+
+var count = 1;
+
+function addTask() {
+  let myNewTask = document.createElement("div");
+  myNewTask.textContent = count++;
 }
-
-function modifyTask(textValue) {
-  myTaskText.textContent = textValue;
-}
-
-buttonModifyTask.addEventListener("click", () => {
-  modifyTask("caca");
-});
