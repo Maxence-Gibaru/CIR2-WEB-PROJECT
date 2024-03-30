@@ -135,7 +135,7 @@ function getTasksFromUI() {
     // Vérifiez si titleElement est différent de null avant d'accéder à sa propriété textContent
     if (titleElement) {
       const name = titleElement.textContent;
-      const state = taskElement.classList.contains("done")
+      const state = taskElement.parentNode.classList.contains("done")
         ? "done"
         : "in-progress";
       tasks.push({ name, state });
