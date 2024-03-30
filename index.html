@@ -12,18 +12,39 @@
       }
 
       .task {
-        width: 100%;
-        text-align: center;
-        background-color: red;
-      }
-
-      .task > div {
-        color: blue;
+        display: flex;
+        flex-direction: center;
+        justify-content: center;
       }
 
       .task > button {
         color: black;
         text-align: right;
+      }
+
+      #wrapper-task {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      #adder-task {
+        display: flex;
+        justify-content: center;
+        border: 1px solid black;
+      }
+
+      .in-progress {
+        color: blue;
+      }
+
+      .done {
+        text-decoration-line: line-through;
+        color: red;
+      }
+
+      #adder-task:hover {
+        cursor: pointer;
       }
     </style>
   </head>
@@ -33,7 +54,12 @@
     <button id="startButton">START</button>
 
     <div id="wrapper-task">
-      <button id="adder-task">add a task</button>
+      <div class="in-progress"></div>
+      <div class="late"></div>
+      <div class="done"></div>
+    </div>
+    <div id="adder-task">
+      <button>Ajouter une tâche</button>
     </div>
     <script src="pomodoro.js"></script>
     <script src="task.js"></script>
