@@ -5,7 +5,18 @@ function pad(number) {
 
 let number = document.getElementById("number");
 
+/* function saveTime(hours, minutes, secondes) {
+  localStorage.setItem("hours", JSON.stringify(hours));
+  localStorage.setItem("minutes", JSON.stringify(minutes));
+  localStorage.setItem("secondes", JSON.stringify(secondes));
+}
 
+function loadTime() {
+  const hour = JSON.parse(localStorage.getItem("hours")) || [];
+  const minutes = JSON.parse(localStorage.getItem("minutes")) || [];
+  const secondes = JSON.parse(localStorage.getItem("secondes")) || [];
+  time.setTime(hour, minutes, secondes);
+} */
 
 let time = {
   hours: 0,
@@ -54,6 +65,10 @@ let time = {
   },
 };
 
+/* time.addEventListener("change", () => {
+  saveTime(time.hours, time.minutes, time.secondes);
+});
+ */
 time.setTime(1, 16, 0); // Définit le temps initial
 
 time.displayTime(); // Affiche le temps initial
@@ -70,5 +85,4 @@ stopButton.addEventListener("click", () => {
   time.start();
 });
 
-
-
+window.addEventListener("load", loadTime);

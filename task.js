@@ -2,6 +2,17 @@ const inProgressTasksContainer = document.querySelector(".in-progress");
 const doneTasksContainer = document.querySelector(".done");
 let editor = document.getElementById("adder-task");
 
+/* 
+
+[] Implémenter les dates de fin de tâches 
+[] Implémenter les sous tâches
+[] Implémenter les priorités de tâches
+[] Implémenter les sections de tâches
+
+Projet > Section > Tâche > Sous tâches
+
+*/
+
 // Fonction pour sauvegarder les tâches dans le stockage local
 function saveTasks(tasks) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -24,15 +35,31 @@ function createButton(className, textContent, clickHandler) {
 // Fonction pour créer les éléments d'une tâches
 function createTaskElement() {
   const taskElement = document.createElement("div");
-  taskElement.className = "task";
+  taskElement.className = "task-form";
 
   const inputTaskName = setTaskName();
   taskElement.appendChild(inputTaskName);
+
+  inputTaskName.addEventListener("keydown", (event) => {
+    if (event.keyCode === 13) {
+      addTask(inputTaskName.value, "in-progress");
+      taskElement.remove();
+    }
+  });
+
+  const cancelButton = createButton("task-button-cancel", "Cancel", () => {
+    let buttonEditor = editor.firstElementChild;
+    buttonEditor.style.display = "block";
+    taskElement.remove();
+    return;
+  });
+  taskElement.appendChild(cancelButton);
 
   const submitButton = createButton("task-button-submit", "Add a task", () => {
     addTask(inputTaskName.value, "in-progress");
     taskElement.remove();
   });
+
   taskElement.appendChild(submitButton);
 
   return taskElement;
@@ -78,11 +105,7 @@ function addTask(name, state) {
   }
 
   const checkTask = createButton("task-check", "", () => {
-    taskDiv.className = "task done";
-    doneTasksContainer.insertBefore(
-      taskDiv,
-      doneTasksContainer.firstElementChild
-    );
+    doneTasksContainer.appendChild(taskDiv);
     saveTasks(getTasksFromUI());
   });
   taskDiv.insertBefore(checkTask, taskDiv.firstElementChild);
@@ -118,6 +141,20 @@ function addTask(name, state) {
       saveTasks(getTasksFromUI());
     }
   });
+
+  if (editButton.textContent == "Save") {
+    let taskNameInput = document.querySelector(".task-name");
+    taskNameInput.addEventListener("keydown", (event) => {
+      if (event.keyCode === 13) {
+        // Save changes and restore original text
+        taskTitle.textContent = taskNameInput.value;
+        taskDiv.replaceChild(taskTitle, taskNameInput);
+        editButton.textContent = "Edit Task";
+        // Sauvegarder la liste mise à jour dans le stockage local
+        saveTasks(getTasksFromUI());
+      }
+    });
+  }
 
   taskDiv.appendChild(editButton);
 
