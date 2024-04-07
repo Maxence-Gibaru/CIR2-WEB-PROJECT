@@ -19,7 +19,7 @@
   <!-- Sidebar Navigation -->
   <div class="sidebar">
     <div class="sidebar-header">
-      <h1 class="sidebar-title">To do List Web</h1>
+      <h1 class="sidebar-title">MyBrainBoard</h1>
       <img src="logo" alt="Logo" class="sidebar-logo" />
     </div>
     <a href="#dashboard"><i class="fas fa-th"></i> Dashboard</a>
@@ -36,35 +36,22 @@
    
   <div class="main-container">
     <nav class="navbar">
-      <div class="project-wrapper">
-        <div class="project-section">
-          <p>Mes Projets</p>
-          <button class="project-add">+</button>
-        </div>
-        <div class="project-panel">
-          <label for="project-name">name</label>
-          <input id="project-name" class="project-name" />
-          <div class="project-button">
-            <button class="project-cancel">Cancel</button>
-            <button class="project-submit">Ajouter</button>
-          </div>
-        </div>
-      </div>
+
     </nav>
 
  
     <div class="widget-container">
       
-      <section class="pomodoro widget">
+      <section id="pomodoro" class="widget">
         <p>Pomodoro</p>
         <div id="number"></div>
         <button id="stopButton">STOP</button>
         <button id="startButton">START</button>
       </section>
  
-      <section class="task-container widget">
+      <section id="tasks" class="task-container widget">
         <div id="wrapper-task">
-          <p><strong>To do list</strong></p>
+          <h2 class="wrapper-title"><strong>MailBox</strong></h2>
           <div class="in-progress">
             <p>In progress</p>
           </div>
@@ -78,7 +65,7 @@
         </div>
       </section>
    
-      <section class="habit-container widget">
+      <section id="habit-tracker" class="habit-container widget">
         <p>Habit Tracker</p>
         <div class="habit-wrapper">
           <div class="habit">Cold Shower</div>
@@ -87,13 +74,32 @@
         </div>
       </section>
 
+      <section id="projects" class="project-wrapper widget">
+        <div class="project-intro">
+                  <p>Mes Projets</p>
+          <button class="project-add">+</button>
+        </div>
+        <div class="project-wrapper">
+
+        </div>
+        <div class="project-panel">
+          <label for="project-name">name</label>
+          <input id="project-name" class="project-name" />
+          <div class="project-button">
+            <button class="project-cancel">Cancel</button>
+            <button class="project-submit">Ajouter</button>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
 
-  JavaScript Files 
+
   <script src="pomodoro.js"></script>
   <script src="task.js"></script>
   <script src="project.js"></script>
   <script src="habitTracker.js"></script>
+  <script src="navbar.js"></script>
 </body>
 </html>

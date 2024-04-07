@@ -72,7 +72,8 @@ function createTaskElement() {
 // Fonction pour créer un imput
 function setTaskName() {
   let input = document.createElement("input");
-  input.className = "task-name";
+  input.className = "task-input";
+  input.placeholder = "Name of task";
   return input;
 }
 
@@ -127,6 +128,11 @@ function addTask(name, state) {
   let taskDiv = document.createElement("div");
   taskDiv.className = "task";
 
+  let taskProperties = document.createElement("div");
+  taskProperties.className = "task-properties";
+
+  taskDiv.appendChild(taskProperties);
+
   if (state === "in-progress") {
     inProgressTasksContainer.appendChild(taskDiv);
   } else if (state === "done") {
@@ -137,7 +143,7 @@ function addTask(name, state) {
     doneTasksContainer.appendChild(taskDiv);
     saveTasks(getTasksFromUI());
   });
-  taskDiv.insertBefore(checkTask, taskDiv.firstElementChild);
+  taskProperties.appendChild(checkTask);
 
   let taskTitle = document.createElement("div");
   taskTitle.className = "task-title";
@@ -147,12 +153,17 @@ function addTask(name, state) {
     createTaskPanel(name);
   });
 
-  taskDiv.appendChild(taskTitle);
+  taskProperties.appendChild(taskTitle);
+
+  let taskSettings = document.createElement("div");
+  taskSettings.className = "task-settings";
+
+  taskDiv.appendChild(taskSettings);
 
   const deleteButton = createButton("task-button", "Delete", () => {
     deleteTask(taskDiv);
   });
-  taskDiv.appendChild(deleteButton);
+  taskSettings.appendChild(deleteButton);
 
   const editButton = createButton("task-button-edit", "Edit Task", () => {
     if (editButton.textContent === "Edit Task") {
@@ -160,7 +171,7 @@ function addTask(name, state) {
       let taskNameInput = setTaskName();
 
       taskNameInput.value = taskTitle.textContent;
-      taskDiv.replaceChild(taskNameInput, taskTitle);
+      taskProperties.replaceChild(taskNameInput, taskTitle);
 
       // Change the edit button text to "Save"
       editButton.textContent = "Save";
@@ -168,7 +179,7 @@ function addTask(name, state) {
       let taskNameInput = document.querySelector(".task-name");
       // Save changes and restore original text
       taskTitle.textContent = taskNameInput.value;
-      taskDiv.replaceChild(taskTitle, taskNameInput);
+      taskProperties.replaceChild(taskTitle, taskNameInput);
       editButton.textContent = "Edit Task";
       // Sauvegarder la liste mise à jour dans le stockage local
       saveTasks(getTasksFromUI());
@@ -189,7 +200,7 @@ function addTask(name, state) {
     });
   }
 
-  taskDiv.appendChild(editButton);
+  taskSettings.appendChild(editButton);
 
   let buttonEditor = editor.firstElementChild;
   buttonEditor.style.display = "block";
