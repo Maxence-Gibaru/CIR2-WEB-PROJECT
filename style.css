@@ -115,7 +115,7 @@ body {
   padding: 20px;
   display: flex;
   justify-content: center;
-  margin-top: 200px;
+  margin-top: 140px;
 }
 
 .widget-container {
@@ -128,11 +128,12 @@ body {
 
 .widget {
   background: #f8f9fa;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex: 1 1 48%;
   margin-bottom: 20px;
   padding: 20px;
+  min-height: 305px;
 }
 
 .task {
@@ -201,3 +202,218 @@ body {
   font-size: 20px;
   text-align: center;
 }
+
+#pomodoro {
+    border-radius: 8px;
+    padding: 48px;
+    text-align: center;
+}
+  
+#pomodoro p {
+    font-size: 32px; 
+    color: #333;
+    margin: 0 0 25px 0; 
+    font-weight: bold;
+}
+  
+#number {
+    font-size: 36px; 
+    color: #6200ee;
+    margin-bottom: 30px; 
+  }
+  
+#pomodoro button {
+    padding: 16px 26px;
+    border: none;
+    border-radius: 15px;
+    background-color: #6200ee;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 0 10px; 
+  }
+#pomodoro button:hover {
+    scale: 1.1;
+  }
+  
+#pomodoro #stopButton {
+    background-color: #ff6347; 
+}
+  
+#pomodoro #stopButton:hover {
+    scale:1.1; 
+}
+.task-container {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 305px; 
+    overflow-y: auto; 
+}
+  
+.wrapper-title {
+    font-size: 28px;
+    color: #333;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    text-align: left;
+    font-weight: normal; 
+}
+  
+.in-progress, .late, .done {
+    background: #f7f7f7;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 4px;
+}
+  
+.in-progress p, .late p, .done p {
+    margin: 0; 
+    color: #6200ee;
+    font-weight: 500;
+}
+  
+#adder-task {
+    text-align: center;
+    margin-top: 13px;
+}
+  
+#adder-task button {
+    padding: 10px 15px;
+    background-color: #6200ee;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+  
+#adder-task button:hover {
+    transform: translateY(-2px);
+}
+  
+
+#adder-task {
+    padding-bottom: 10px;
+}
+  
+.task-form {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px; 
+}
+  
+
+.task-input {
+    padding: 10px; 
+    border: 1px solid ; 
+    border-radius: 4px; 
+    margin-right: 10px; 
+  }
+  
+
+#adder-task {
+    text-align: center; 
+    padding-top: 10px; 
+}
+  
+.task-button-add {
+    margin-top: 20px; 
+    padding: 10px 20px; 
+}
+
+#projects {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; 
+}
+  
+.project-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+  
+.project-intro p {
+    font-size: 26px;
+    color: #333;
+    margin: 0;
+    flex-grow: 1; 
+    font-weight: bold;
+  }
+  
+.project-add {
+    background-color: #6200ee;
+    color: white;
+    border: none;
+    border-radius: 50%; 
+    padding: 10px 15px;
+    cursor: pointer;
+
+  }
+  
+.project-add:hover {
+    scale: 1.1;
+}
+  
+.project-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+  
+.project-panel label {
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+.project-name {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 12px; 
+}
+  
+.project-button {
+    display: flex;
+    justify-content: flex-end; 
+    gap: 15px; 
+}
+  
+.project-cancel, .project-submit {
+    padding: 12px 17px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+  
+.project-cancel {
+    background-color: #6200ee; 
+    color: white;
+}
+  
+.project-cancel:hover {
+    background-color: #6200ee;
+    transform: translateY(-2px);
+}
+  
+.project-submit {
+    background-color: #6200ee;
+    color: white;
+}
+  
+.project-submit:hover {
+    background-color: #6200ee;
+    transform: translateY(-2px);
+}
+  
+  
