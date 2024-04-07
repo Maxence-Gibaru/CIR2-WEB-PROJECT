@@ -26,6 +26,7 @@
         text-align: center;
         flex-direction: row;
         justify-content: center;
+        gap: 50px;
       }
 
       #wrapper-task {
@@ -50,6 +51,10 @@
 
       .done .task-title {
         text-decoration-line: line-through;
+      }
+
+      .task-title:hover {
+        background-color: darkgray;
       }
 
       #adder-task:hover {
@@ -108,7 +113,7 @@
         z-index: 1000;
       }
 
-      .background-overlay {
+    .background-overlay {
       position: fixed;
       top: 0;
       left: 0;
@@ -119,18 +124,35 @@
       display: none; /* Par défaut, l'overlay est caché */
     }
 
+    .task-panel {
+        display: flex;
+        flex-direction: column;
+        visibility: hidden;
+        position: absolute;
+        top: 50%; /* Place le haut de l'élément au milieu de la fenêtre */
+        left: 50%; /* Place la gauche de l'élément au milieu de la fenêtre */
+        transform: translate(
+          -50%,
+          -50%
+        ); /* Déplace l'élément de moitié de sa propre largeur et hauteur vers le haut et vers la gauche */
+        background-color: white;
+        padding: 10vw;
+        z-index: 1000;
+    }
+
 
     </style>
   </head>
   <body>
     <div class="main-container">
+      <div class="background-overlay"></div>
       <nav class="navbar">
         <div class="project-wrapper">
           <div class="project-section">
             <p>Mes Projets</p>
             <button class="project-add">+</button>
           </div>
-          <div class="background-overlay"></div>
+
           <div class="project-panel">
             <label>name</label>
             <input class="project-name"></input>

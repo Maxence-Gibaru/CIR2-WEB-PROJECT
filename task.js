@@ -13,6 +13,10 @@ Projet > Section > Tâche > Sous tâches
 
 */
 
+let mainContainer = document.querySelector(".main-container");
+
+let backgroundOverlay = document.querySelector(".background-overlay");
+
 // Fonction pour sauvegarder les tâches dans le stockage local
 function saveTasks(tasks) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -87,6 +91,31 @@ function deleteTask(taskDiv) {
   saveTasks(getTasksFromUI());
 }
 
+function createTaskPanel(name) {
+  let taskPanel = document.createElement("div");
+  taskPanel.className = "task-panel";
+  mainContainer.appendChild(taskPanel);
+  let taskTitle = document.createElement("div");
+  taskTitle.textContent = name;
+  taskPanel.appendChild(taskTitle);
+  backgroundOverlay.style.display = "block";
+  taskPanel.style.visibility = "visible";
+
+  backgroundOverlay.addEventListener("click", () => {
+    backgroundOverlay.style.display = "none";
+    taskPanel.style.visibility = "hidden";
+  });
+  let subTaskAdder = document.createElement("button");
+  subTaskAdder.textContent = "Add a sub-task";
+  taskPanel.appendChild(subTaskAdder);
+
+  subTaskAdder.addEventListener("click", () => {
+    subTaskAdder.style.display = "none";
+    let taskForm = createTaskElement();
+    taskPanel.appendChild(taskForm);
+  });
+}
+
 // Fonction pour ajouter une tâche après initialisation
 function addTask(name, state) {
   if (!name || !name.trim()) {
@@ -113,6 +142,10 @@ function addTask(name, state) {
   let taskTitle = document.createElement("div");
   taskTitle.className = "task-title";
   taskTitle.textContent = name;
+
+  taskTitle.addEventListener("click", () => {
+    createTaskPanel(name);
+  });
 
   taskDiv.appendChild(taskTitle);
 
