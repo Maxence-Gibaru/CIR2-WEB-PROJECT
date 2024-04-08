@@ -1,0 +1,8 @@
+server/
+
+server/routes/auth.js
+
+node_modules/
+
+package-lock.json
+package.json

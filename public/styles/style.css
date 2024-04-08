@@ -1,5 +1,5 @@
 :root {
-  --blue-color: #1458dd;
+  --blue-color: #6200ee;
   --grey-line: #e3e8ee;
 }
 
@@ -30,11 +30,9 @@ body {
   border: 1px solid var(--grey-line);
 }
 .sidebar-logo {
-    margin-bottom: 20px; 
-    width: 90px;
+     
+    width: 40px;
     height: auto; 
-    margin-right: 30px;
-    margin-top: 20px;
   }
   
 
@@ -60,6 +58,7 @@ body {
   align-items: center;
   border-bottom: 1px solid var(--grey-line);
   margin-bottom: 40px;
+  gap: 10px;
 }
 
 .sidebar-logo {
