@@ -24,9 +24,9 @@ body {
   padding: 10px;
 }
 .sidebar-logo {
-    margin-bottom: 20px; /* Existing style */
-    width: 90px; /* Adjust this value to change the logo width */
-    height: auto; /* This will maintain the aspect ratio of the logo */
+    margin-bottom: 20px; 
+    width: 90px;
+    height: auto; 
     margin-right: 30px;
     margin-top: 20px;
   }
