@@ -53,17 +53,27 @@ let time = {
       this.timer = setInterval(() => {
         this.decreaseTime();
         this.displayTime();
+        console.log(this.timer);
       }, 1000);
     }
   },
   stop: function () {
-    clearInterval(this.timer);
     if (this.timer !== null) {
       clearInterval(this.timer);
       this.timer = null;
     }
   },
 };
+
+const buttons = document.querySelectorAll(".selection-buttons button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    let newValue = button.textContent;
+    time.setTime(0, newValue, 0);
+    time.displayTime();
+  });
+});
 
 /* time.addEventListener("change", () => {
   saveTime(time.hours, time.minutes, time.secondes);
@@ -73,7 +83,7 @@ time.setTime(1, 16, 0); // Définit le temps initial
 
 time.displayTime(); // Affiche le temps initial
 
-time.start(); // Commence le compte à rebours
+/* time.start(); // Commence le compte à rebours */
 
 let stopButton = document.getElementById("stopButton");
 stopButton.addEventListener("click", () => {
@@ -81,8 +91,8 @@ stopButton.addEventListener("click", () => {
 });
 
 let startButton = document.getElementById("startButton");
-stopButton.addEventListener("click", () => {
+startButton.addEventListener("click", () => {
   time.start();
 });
 
-window.addEventListener("load", loadTime);
+/* window.addEventListener("load", loadTime); */
