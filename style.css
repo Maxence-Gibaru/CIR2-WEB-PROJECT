@@ -29,6 +29,14 @@ body {
   padding: 10px 0;
   border: 1px solid var(--grey-line);
 }
+.sidebar-logo {
+    margin-bottom: 20px; 
+    width: 90px;
+    height: auto; 
+    margin-right: 30px;
+    margin-top: 20px;
+  }
+  
 
 .sidebar a {
   padding: 25px 30px;
@@ -144,7 +152,7 @@ body {
   flex: 1 1 48%;
   margin-bottom: 20px;
   padding: 20px;
-  min-height: 305px;
+  max-height: 305px;
 }
 
 .task {
@@ -227,6 +235,9 @@ body {
   border-radius: 8px;
   padding: 48px;
   text-align: center;
+}
+.pomodoro-content{
+    margin-top: -20px;
 }
 
 #pomodoro p {
