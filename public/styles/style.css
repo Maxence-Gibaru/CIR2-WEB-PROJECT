@@ -1,5 +1,5 @@
 :root {
-  --blue-color: #1458dd;
+  --blue-color: #7650e0;
   --grey-line: #e3e8ee;
 }
 
@@ -30,11 +30,9 @@ body {
   border: 1px solid var(--grey-line);
 }
 .sidebar-logo {
-     
-    width: 40px;
-    height: auto; 
-  }
-  
+  width: 40px;
+  height: auto;
+}
 
 .sidebar a {
   padding: 25px 30px;
@@ -235,8 +233,8 @@ body {
   padding: 48px;
   text-align: center;
 }
-.pomodoro-content{
-    margin-top: -20px;
+.pomodoro-content {
+  margin-top: -20px;
 }
 
 #pomodoro p {
@@ -397,7 +395,7 @@ body {
   scale: 1.1;
 }
 
-.project-panel {
+.popup-window {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -406,7 +404,7 @@ body {
   padding: 200px;
   display: flex;
   flex-direction: column;
-  visibility: hidden;
+  visibility: visible;
   gap: 10px;
   z-index: 111;
 }
@@ -460,7 +458,7 @@ body {
 
 .background-overlay {
   position: absolute;
-  left: 0;
+  top: 0;
   right: 0;
   display: none;
   background-color: black;
