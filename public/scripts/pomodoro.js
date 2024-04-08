@@ -19,17 +19,13 @@ function loadTime() {
 } */
 
 let time = {
-  hours: 0,
   minutes: 0,
   secondes: 0,
   timer: null,
   displayTime: function () {
-    number.textContent = `${pad(this.hours)}:${pad(this.minutes)}:${pad(
-      this.secondes
-    )}`;
+    number.textContent = `${pad(this.minutes)}:${pad(this.secondes)}`;
   },
-  setTime: function (hoursValue, minutesValue, secondesValue) {
-    this.hours = hoursValue;
+  setTime: function (minutesValue, secondesValue) {
     this.minutes = minutesValue;
     this.secondes = secondesValue;
   },
@@ -42,10 +38,6 @@ let time = {
     if (this.minutes < 0) {
       this.minutes = 59;
       this.hours--;
-    }
-    if (this.hours < 0) {
-      time.stop();
-      alert("Le compte à rebours est terminé !");
     }
   },
   start: function () {
@@ -63,6 +55,11 @@ let time = {
       this.timer = null;
     }
   },
+
+  initialTimer: function () {
+    this.setTime(25, 0);
+    this.displayTime();
+  },
 };
 
 const buttons = document.querySelectorAll(".selection-buttons button");
@@ -70,7 +67,7 @@ const buttons = document.querySelectorAll(".selection-buttons button");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     let newValue = button.textContent;
-    time.setTime(0, newValue, 0);
+    time.setTime(newValue, 0);
     time.displayTime();
   });
 });
@@ -80,7 +77,7 @@ buttons.forEach((button) => {
 });
  */
 
-
+time.initialTimer();
 time.displayTime(); // Affiche le temps initial
 
 /* time.start(); // Commence le compte à rebours */

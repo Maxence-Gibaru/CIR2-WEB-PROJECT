@@ -1,5 +1,7 @@
 import { createPopupWindow } from "./popupEditor.js";
 
+let bodyElement = document.body;
+
 const buttonAdd = document.querySelector(".project-add");
 
 function saveProject(projects) {
@@ -7,8 +9,8 @@ function saveProject(projects) {
 }
 
 function showPanel() {
-  createPopupWindow();
-  
+  let newPopup = createPopupWindow();
+  bodyElement.appendChild(newPopup);
 }
 
 function addProject() {
