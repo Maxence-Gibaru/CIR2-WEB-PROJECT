@@ -83,6 +83,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  margin-top: 10px;
 }
 
 .logout-link {
@@ -498,8 +499,8 @@ p {
 .sidebar-account::before {
   content: " ";
   position: absolute;
-  top: -250%;
-  left: 10%;
+  top: -235%;
+  left: 5%;
   width: 200px;
   height: 200px;
   background-image: url("../assets/images/dash-illus.jpg");
