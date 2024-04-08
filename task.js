@@ -175,8 +175,21 @@ function addTask(name, state) {
 
       // Change the edit button text to "Save"
       editButton.textContent = "Save";
+
+      // Ajouter immédiatement l'écouteur pour "Entrée" sur le nouveau champ de saisie
+      taskNameInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          // Utilisation de 'event.key' pour une meilleure compatibilité
+          // Sauvegarder les changements et restaurer le texte original
+          taskTitle.textContent = taskNameInput.value;
+          taskProperties.replaceChild(taskTitle, taskNameInput);
+          editButton.textContent = "Edit Task";
+          // Sauvegarder la liste mise à jour dans le stockage local
+          saveTasks(getTasksFromUI());
+        }
+      });
     } else {
-      let taskNameInput = document.querySelector(".task-name");
+      let taskNameInput = document.querySelector(".task-input");
       // Save changes and restore original text
       taskTitle.textContent = taskNameInput.value;
       taskProperties.replaceChild(taskTitle, taskNameInput);
@@ -187,7 +200,7 @@ function addTask(name, state) {
   });
 
   if (editButton.textContent == "Save") {
-    let taskNameInput = document.querySelector(".task-name");
+    let taskNameInput = document.querySelector(".task-input");
     taskNameInput.addEventListener("keydown", (event) => {
       if (event.keyCode === 13) {
         // Save changes and restore original text

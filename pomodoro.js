@@ -79,7 +79,7 @@ buttons.forEach((button) => {
   saveTime(time.hours, time.minutes, time.secondes);
 });
  */
-time.setTime(1, 16, 0); // Définit le temps initial
+
 
 time.displayTime(); // Affiche le temps initial
 

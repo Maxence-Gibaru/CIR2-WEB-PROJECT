@@ -19,8 +19,8 @@
   <!-- Sidebar Navigation -->
   <div class="sidebar">
     <div class="sidebar-header">
-      <h1 class="sidebar-title">MyBrainBoard</h1>
       <img src="logo" alt="Logo" class="sidebar-logo" />
+      <h1 class="sidebar-title">MyBrainBoard</h1>
     </div>
     <a href="#dashboard"><i class="fas fa-th"></i> Dashboard</a>
     <a href="#projects"><i class="fas fa-project-diagram"></i> My Projects</a>
@@ -28,10 +28,10 @@
     <a href="#pomodoro"><i class="fas fa-clock"></i> Pomodoro</a>
     <a href="#habit-tracker"><i class="fas fa-chart-line"></i> Habit Tracker</a>
     <!--Ici faut mettre soit logout si l'utilisateur a sign in ou autre chose mais jsp quoi-->
+    <!-- Go mettre l'utilisateur sign in plutôt -->
     <div class="sidebar-spacer"></div>
       <a href="#logout" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
-
   </div>
    
   <div class="main-container">
@@ -73,7 +73,7 @@
       </section>
    
       <section id="habit-tracker" class="habit-container widget">
-        <p>Habit Tracker</p>
+        <h2>Habit Tracker</h2>
         <div class="habit-wrapper">
           <div class="habit">Cold Shower</div>
           <div class="habit">8 hours of sleep</div>
@@ -81,12 +81,20 @@
         </div>
       </section>
 
-      <section id="projects" class="project-wrapper widget">
+      <section id="projects" class="widget">
         <div class="project-intro">
-                  <p>My projects</p>
+                  <h2>My projects</h2>
           <button class="project-add">+</button>
         </div>
+        <div class="project-wrapper">
+          <ul>
+            <li>Project 1</li>
+            <li>Project 1</li>
+            <li>Project 1</li>
+          </ul>
+        </div>
 
+        <div class="background-overlay"></div>
         <div class="project-panel">
           <label for="project-name">Project Name</label>
           <input id="project-name" class="project-name" />

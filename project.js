@@ -1,12 +1,5 @@
 const buttonAdd = document.querySelector(".project-add");
 
-
-
-
-
-
-
-
 function saveProject(projects) {
   localStorage.setItem("projects", JSON.stringify(projects));
 }
