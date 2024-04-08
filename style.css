@@ -1,3 +1,8 @@
+:root {
+  --blue-color: #1458dd;
+  --grey-line: #e3e8ee;
+}
+
 * {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
@@ -21,7 +26,8 @@ body {
   left: 0;
   bottom: 0;
   overflow: auto;
-  padding: 10px;
+  padding: 10px 0;
+  border: 1px solid var(--grey-line);
 }
 .sidebar-logo {
     margin-bottom: 20px; 
@@ -40,7 +46,7 @@ body {
   display: flex;
   align-items: center;
   transition: color 0.3s;
-  margin-bottom: 10px;
+  margin: 10px;
 }
 
 .sidebar a i {
@@ -48,8 +54,12 @@ body {
 }
 
 .sidebar-header {
+  display: flex;
   text-align: center;
-  padding-bottom: 25px;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--grey-line);
+  margin-bottom: 40px;
 }
 
 .sidebar-logo {
@@ -76,7 +86,7 @@ body {
 }
 
 .sidebar a:hover {
-  background: #6200ee;
+  background: var(--blue-color);
   border-radius: 10px;
   text-decoration: none;
   color: white;
@@ -92,6 +102,7 @@ body {
   left: 250px;
   top: 8px;
   z-index: 10000;
+  border-bottom: 1px solid var(--grey-line);
 }
 
 .btn {
@@ -110,7 +121,7 @@ body {
 }
 
 .sign-up-btn {
-  background-color: #6200ee;
+  background-color: var(--blue-color);
   color: white;
 }
 
@@ -151,6 +162,15 @@ body {
   margin: 10px 0;
   padding: 10px;
   border-bottom: 1px solid #eee;
+}
+
+.task .task-settings button {
+  padding: 10px 15px;
+  background-color: var(--blue-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .task:hover .task-settings {
@@ -229,7 +249,7 @@ body {
 
 #number {
   font-size: 36px;
-  color: #6200ee;
+  color: #1458dd;
   margin-bottom: 30px;
 }
 
@@ -237,7 +257,7 @@ body {
   padding: 16px 26px;
   border: none;
   border-radius: 15px;
-  background-color: #6200ee;
+  background-color: var(--blue-color);
   color: white;
   font-size: 1em;
   cursor: pointer;
@@ -301,7 +321,7 @@ body {
 
 #adder-task button {
   padding: 10px 15px;
-  background-color: #6200ee;
+  background-color: var(--blue-color);
   color: white;
   border: none;
   border-radius: 10px;
@@ -384,7 +404,7 @@ body {
 }
 
 .project-add {
-  background-color: #6200ee;
+  background-color: var(--blue-color);
   color: white;
   border: none;
   border-radius: 50%;
@@ -397,9 +417,17 @@ body {
 }
 
 .project-panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #808080;
+  padding: 200px;
   display: flex;
   flex-direction: column;
+  visibility: hidden;
   gap: 10px;
+  z-index: 111;
 }
 
 .project-panel label {
@@ -430,23 +458,31 @@ body {
 }
 
 .project-cancel {
-  background-color: #6200ee;
+  background-color: var(--blue-color);
   color: white;
 }
 
 .project-cancel:hover {
-  background-color: #6200ee;
+  background-color: var(--blue-color);
   transform: translateY(-2px);
 }
 
 .project-submit {
-  background-color: #6200ee;
+  background-color: var(--blue-color);
   color: white;
 }
 
 .project-submit:hover {
-  background-color: #6200ee;
+  background-color: var(--blue-color);
   transform: translateY(-2px);
 }
 
-
+.background-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: none;
+  background-color: black;
+  opacity: 0.3;
+  z-index: 11;
+}
