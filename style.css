@@ -23,6 +23,14 @@ body {
   overflow: auto;
   padding: 10px;
 }
+.sidebar-logo {
+    margin-bottom: 20px; /* Existing style */
+    width: 90px; /* Adjust this value to change the logo width */
+    height: auto; /* This will maintain the aspect ratio of the logo */
+    margin-right: 30px;
+    margin-top: 20px;
+  }
+  
 
 .sidebar a {
   padding: 25px 30px;
@@ -41,7 +49,7 @@ body {
 
 .sidebar-header {
   text-align: center;
-  padding-bottom: 20px;
+  padding-bottom: 25px;
 }
 
 .sidebar-logo {
@@ -133,7 +141,7 @@ body {
   flex: 1 1 48%;
   margin-bottom: 20px;
   padding: 20px;
-  min-height: 305px;
+  max-height: 305px;
 }
 
 .task {
@@ -207,6 +215,9 @@ body {
   border-radius: 8px;
   padding: 48px;
   text-align: center;
+}
+.pomodoro-content{
+    margin-top: -20px;
 }
 
 #pomodoro p {
@@ -419,3 +430,5 @@ body {
   background-color: #6200ee;
   transform: translateY(-2px);
 }
+
+
