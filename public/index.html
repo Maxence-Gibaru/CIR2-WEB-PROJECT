@@ -11,10 +11,14 @@
 <body>
 
   <header class="top-nav">
-    <div class="nav-spacer"></div> 
-    <!--Max ici faut mettre comme un truc pour account si l'utilisateur a deja login ou sign up -->
-    <button class="btn login-btn">Login</button>
-    <button class="btn sign-up-btn">Sign Up</button>
+    <div class="nav-spacer">
+      <form class="search">
+        <input type="search" name="search" id="search" placeholder="Search...">
+      </form>
+      <a class = "notifications_button" href="#notifications"><i class="fas fa-bell"></i></a>
+      <a class = "settings_buttons" href="#settings"><i class="fas fa-cog"></i></a>
+    </div> 
+
   </header>
   <!-- Sidebar Navigation -->
   <div class="sidebar">
@@ -22,16 +26,23 @@
       <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo"/>
       <h1 class="sidebar-title">MyBrainBoard</h1>
     </div>
-    <a href="#dashboard"><i class="fas fa-th"></i> Dashboard</a>
-    <a href="#projects"><i class="fas fa-project-diagram"></i> My Projects</a>
-    <a href="#tasks"><i class="fas fa-tasks"></i> Tasks</a>
-    <a href="#pomodoro"><i class="fas fa-clock"></i> Pomodoro</a>
-    <a href="#habit-tracker"><i class="fas fa-chart-line"></i> Habit Tracker</a>
+    <div class="sidebar-container">
+    <div class="sidebar-nav">
+      <a href="#dashboard"><i class="fas fa-th"></i> Dashboard</a>
+      <a href="#projects"><i class="fas fa-project-diagram"></i> My Projects</a>
+      <a href="#tasks"><i class="fas fa-tasks"></i> Tasks</a>
+      <a href="#pomodoro"><i class="fas fa-clock"></i> Pomodoro</a>
+      <a href="#habit-tracker"><i class="fas fa-chart-line"></i> Habit Tracker</a>
+    </div>
     <!--Ici faut mettre soit logout si l'utilisateur a sign in ou autre chose mais jsp quoi-->
     <!-- Go mettre l'utilisateur sign in plutôt -->
-    <div class="sidebar-spacer"></div>
-      <a href="#logout" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <div class="sidebar-account">
+      <a href="#logout" class="logout-link"><i class="far fa-user"></i>Account</a>
+      <p class="username"></p>
+      <p class="mail"></p>
     </div>
+    </div>
+  </div>
   </div>
    
   <div class="main-container">

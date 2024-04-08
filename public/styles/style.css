@@ -1,5 +1,5 @@
 :root {
-  --blue-color: #1458dd;
+  --blue-color: #7650e0;
   --grey-line: #e3e8ee;
 }
 
@@ -14,13 +14,15 @@ body {
   box-sizing: border-box;
 }
 
+
+
 .sidebar {
   width: 250px;
   background: white;
   color: grey;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
   position: fixed;
   top: 0;
   left: 0;
@@ -57,8 +59,9 @@ body {
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid var(--grey-line);
-  margin-bottom: 40px;
+
   gap: 10px;
+  min-height: 80px;
 }
 
 .sidebar-logo {
@@ -72,9 +75,15 @@ body {
   margin-bottom: 20px;
 }
 
-.sidebar-spacer {
-  flex-grow: 1;
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
+
+
 
 .logout-link {
   text-decoration: none;
@@ -102,31 +111,42 @@ body {
   top: 0;
   z-index: 10000;
   border-bottom: 1px solid var(--grey-line);
+  max-height: 91px;
 }
 
-.btn {
-  padding: 20px 30px;
-  margin-left: 15px;
-  border-radius: 15px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 16px;
+
+.top-nav .search input[type="search"] {
+  padding: 14px 28px; 
+  font-size: 17px;
+  border: 1px solid #ccc; 
+  border-radius: 7px; 
+  margin-right: 50px;
 }
 
-.login-btn {
-  background: none;
-  color: #333;
+
+.top-nav .nav-spacer {
+  display: flex; 
+  align-items: center; 
 }
 
-.sign-up-btn {
-  background-color: var(--blue-color);
-  color: white;
+
+.top-nav .nav-spacer a {
+  margin-right: 16px;   
 }
 
-.btn:hover {
-  scale: 1.1;
+.top-nav .nav-spacer a {
+  display: inline-block; 
+  padding: 8px; 
+  font-size: 20px; 
 }
+
+
+.top-nav .nav-spacer a i {
+  margin-right: 8px;
+}
+
+
+
 
 .main-container {
   margin-left: 250px;
