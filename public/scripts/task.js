@@ -52,7 +52,7 @@ function createTaskForm(isSubtask = false, parentTaskName = null) {
       const taskName = inputTaskName.value;
       if (isSubtask) {
         // Ici, ajoutez la sous-tâche à la tâche principale spécifiée
-        addSubtask(parentTaskName, taskName, choosedDate);
+        addSubtask(false, parentTaskName, taskName, choosedDate);
       } else {
         // Ajoutez une tâche principale comme avant
         addTask(taskName, "in-progress", choosedDate);
@@ -78,7 +78,7 @@ function createTaskForm(isSubtask = false, parentTaskName = null) {
     const taskName = inputTaskName.value;
     if (isSubtask) {
       // Ici, ajoutez la sous-tâche à la tâche principale spécifiée
-      addSubtask(parentTaskName, taskName, choosedDate);
+      addSubtask(false, parentTaskName, taskName, choosedDate);
     } else {
       // Ajoutez une tâche principale comme avant
       addTask(taskName, "in-progress", choosedDate);
@@ -115,6 +115,7 @@ function deleteTask(taskDiv) {
 
 function createTaskPanel(taskElement) {
   let popupWindow = createPopupWindow();
+
   let taskName = taskElement.querySelector(".task-title").textContent;
   createSubTaskEditor(taskName, popupWindow);
   document.body.appendChild(popupWindow);
@@ -126,9 +127,17 @@ function createTaskPanel(taskElement) {
     popupWindow.appendChild(subTaskForm);
   });
 
-  popupWindow.appendChild(taskElement);
+  const tasks = JSON.parse(localStorage.getItem("tasks") || []);
+  const taskIndex = tasks.findIndex((task) => task.name === taskName);
+
+  /* popupWindow.appendChild(taskElement); */
   popupWindow.appendChild(subTaskButtonContainer);
   subTaskButtonContainer.appendChild(adderSubTask);
+
+  tasks[taskIndex].subTasks.forEach((subTask) => {
+    console.log(subTask);
+    addSubtask(true, taskName, subTask.name, subTask.date);
+  });
 }
 
 function findTaskByName(taskName) {
@@ -257,7 +266,7 @@ function addTask(name, state, date) {
   saveTasks(getTasksFromUI());
 }
 
-function addSubtask(parentTaskName, taskName, choosedDate) {
+function addSubtask(created = false, parentTaskName, taskName, choosedDate) {
   let parentTask = findTaskByName(parentTaskName);
   let popupWindow = document.querySelector(".popup-window");
   let subTaskAdder = document.querySelector(".sub-adder-task");
@@ -268,7 +277,7 @@ function addSubtask(parentTaskName, taskName, choosedDate) {
     (task) => task.name === parentTaskName
   );
 
-  if (parentTaskIndex !== -1) {
+  if (parentTaskIndex !== -1 && !created) {
     const subTask = {
       name: taskName,
       state: "in-progress",
