@@ -51,8 +51,8 @@ const manipulate = () => {
     // Check if the current date is today
     let isToday =
       i === date.getDate() &&
-        month === new Date().getMonth() &&
-        year === new Date().getFullYear()
+      month === new Date().getMonth() &&
+      year === new Date().getFullYear()
         ? "active"
         : "";
     lit += `<li class="${isToday}">${i}</li>`;
@@ -70,6 +70,15 @@ const manipulate = () => {
   // update the HTML of the dates element
   // with the generated calendar
   day.innerHTML = lit;
+
+  let days = day.querySelectorAll("li");
+
+  days.forEach((myDay) => {
+    myDay.addEventListener("click", () => {
+      var selectedDate = [myDay.innerHTML, months[month], year];
+      myDay.className = "selected";
+    });
+  });
 };
 
 manipulate();

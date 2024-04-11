@@ -1,27 +1,42 @@
+import { Task, editorButton } from "./task.js";
+
 export function saveTasks(newTask) {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  console.log(newTask);
 
-  // Vérifiez si 'tasks' est vraiment un tableau
-  console.log(Array.isArray(tasks)); // Doit être 'true'
+  let taskIndex = tasks.findIndex((t) => t.id === newTask.id);
 
-  // Continuez seulement si 'tasks' est un tableau
-  if (Array.isArray(tasks)) {
-    const existingTaskIndex = tasks.findIndex(task => task.name === newTask.name);
-
-    if (existingTaskIndex !== -1) {
-      tasks[existingTaskIndex] = newTask;
-    } else {
-      tasks.push(newTask);
-    }
-
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+  if (taskIndex != -1) {
+    tasks[taskIndex] = newTask;
   } else {
-    console.error("Expected 'tasks' to be an array but received:", tasks);
+    tasks.push(newTask);
   }
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 // Fonction pour charger les tâches à partir du stockage local
 export function loadTasks() {
-  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   console.log(tasks);
+
+  tasks.forEach((task) => {
+    let taskObject = new Task(
+      task.name,
+      task.state,
+      task.date,
+      task.subTasks,
+      task.id
+    );
+    let wrapperTask = document.querySelector(".wrapper-task");
+
+    taskObject.createTaskNode(wrapperTask, editorButton);
+  });
+}
+
+export function removeTask(task) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  var newTasks = tasks.filter((t) => t.id != task.id);
+
+  localStorage.setItem("tasks", JSON.stringify(newTasks));
 }

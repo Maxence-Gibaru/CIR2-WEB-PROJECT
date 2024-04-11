@@ -1,5 +1,6 @@
 import { Task, editorButton } from "../task.js";
 import { createPopupWindow, createSubTaskEditor } from "./popupEditor.js";
+import { hashCode } from "../utils.js";
 
 // Fonction pour créer un imput
 export function createInputTask() {
@@ -27,7 +28,7 @@ export function addSubtaskToUI(subTask, popupWindow) {
 }
 
 // Fonction pour créer les éléments d'une tâches
-export function createTaskForm(isSubtask = false, parentTaskName = null) {
+export function createTaskForm(isSubtask = false) {
   let choosedDate;
 
   const taskElement = document.createElement("div");
@@ -41,13 +42,30 @@ export function createTaskForm(isSubtask = false, parentTaskName = null) {
       const taskName = inputTaskName.value;
       if (isSubtask) {
         // Ici, ajoutez la sous-tâche à la tâche principale spécifiée
-        let wrapperTask = document.querySelector(".popup-window").querySelector(".wrapper-task");
-        let newTask = new Task(taskName, "in-progress", choosedDate, [])
-        newTask.createTaskNode(wrapperTask, document.querySelector(".popup-window").querySelector(".adder-task"))
+        let wrapperTask = document
+          .querySelector(".popup-window")
+          .querySelector(".wrapper-task");
+        let newTask = new Task(
+          taskName,
+          "in-progress",
+          choosedDate,
+          [],
+          hashCode(`${taskName}-${Date.now()}`).toString()
+        );
+        newTask.createTaskNode(
+          wrapperTask,
+          document.querySelector(".popup-window").querySelector(".adder-task")
+        );
       } else {
         // Ajoutez une tâche principale comme avant
-        let wrapperTask = document.querySelector(".wrapper-task")
-        let newTask = new Task(taskName, "in-progress", choosedDate, []);
+        let wrapperTask = document.querySelector(".wrapper-task");
+        let newTask = new Task(
+          taskName,
+          "in-progress",
+          choosedDate,
+          [],
+          hashCode(`${taskName}-${Date.now()}`).toString()
+        );
         newTask.createTaskNode(wrapperTask, editorButton);
         /* console.log(JSON.stringify(newTask)) */
       }
@@ -55,30 +73,73 @@ export function createTaskForm(isSubtask = false, parentTaskName = null) {
     }
   });
 
-  const deadLineDate = createButton("task-date", "Date", () => {
-    choosedDate = "today";
-    deadLineDate.textContent = choosedDate;
+  const deadLineDate = createButton("date-picker", "Date", () => {
+    let calendarContainer = document.querySelector(".calendar-container");
+    calendarContainer.style.display =
+      calendarContainer.style.display === "none" ? "block" : "none";
+    const buttonRect = deadLineDate.getBoundingClientRect();
+    calendarContainer.style.left = buttonRect.left + "px"; // Position horizontale du bouton
+    calendarContainer.style.top = buttonRect.bottom + "px"; // Position verticale juste en dessous bouton
+
+    let days = calendarContainer.querySelectorAll(".calendar-dates li");
+
+    days.forEach((d) => {
+      d.addEventListener("click", () => {
+        // Trouver l'ancien jour sélectionné et le désactiver
+        let previousSelected = calendarContainer.querySelector(
+          ".calendar-dates .selected"
+        );
+        if (previousSelected) {
+          previousSelected.classList.remove("selected");
+        }
+
+        // Marquer le nouveau jour comme sélectionné
+        d.classList.add("selected");
+
+        // Mettre à jour la date choisie et l'afficher
+        choosedDate = d.textContent;
+        deadLineDate.textContent = choosedDate;
+
+        calendarContainer.style.display = "none";
+      });
+    });
   });
   taskElement.appendChild(deadLineDate);
 
-  const cancelButton = createButton("task-button-cancel", "Cancel", () => {
+  const cancelButton = createButton("task-button", "Cancel", () => {
     editorButton.style.display = "block";
     taskElement.remove();
     return;
   });
   taskElement.appendChild(cancelButton);
 
-  const submitButton = createButton("task-button-submit", "Add a task", () => {
+  const submitButton = createButton("task-button", "Add a task", () => {
     const taskName = inputTaskName.value;
     if (isSubtask) {
       // Ici, ajoutez la sous-tâche à la tâche principale spécifiée
-      let wrapperTask = document.querySelector(".popup-window").querySelector(".wrapper-task");
-      let newTask = new Task(taskName, "in-progress", choosedDate, [])
-      newTask.createTaskNode(wrapperTask, document.querySelector(".popup-window").querySelector(".adder-task"))
+      let wrapperTask = document
+        .querySelector(".popup-window")
+        .querySelector(".wrapper-task");
+      let newTask = new Task(
+        taskName,
+        "in-progress",
+        choosedDate,
+        [],
+        hashCode(`${taskName}-${Date.now()}`).toString()
+      );
+      newTask.createTaskNode(
+        wrapperTask,
+        document.querySelector(".popup-window").querySelector(".adder-task")
+      );
     } else {
-
-      let wrapperTask = document.querySelector(".wrapper-task")
-      let newTask = new Task(taskName, "in-progress", choosedDate, []);
+      let wrapperTask = document.querySelector(".wrapper-task");
+      let newTask = new Task(
+        taskName,
+        "in-progress",
+        choosedDate,
+        [],
+        hashCode(`${taskName}-${Date.now()}`).toString()
+      );
       newTask.createTaskNode(wrapperTask, editorButton);
     }
     taskElement.remove();
@@ -117,5 +178,4 @@ export function createTaskPanel(taskNode) {
   popupWindow.appendChild(wrapperTask);
 
   // Récupérer et afficher les sous-tâches existantes
-
 }
