@@ -1,17 +1,23 @@
 const bodyElement = document.body;
 
-export function createPopupWindow() {
+function createOverlay() {
   let backgroundOverlay = document.createElement("div");
   backgroundOverlay.className = "background-overlay";
-  backgroundOverlay.addEventListener("click", () => {
-    backgroundOverlay.style.display = "none";
-    popupWindow.style.display = "none";
-  });
-
   document.body.appendChild(backgroundOverlay);
 
+  return backgroundOverlay;
+}
+
+export function createPopupWindow() {
   let popupWindow = document.createElement("div");
   popupWindow.className = "popup-window";
+
+  let backgroundOverlay = createOverlay();
+
+  backgroundOverlay.addEventListener("click", () => {
+    backgroundOverlay.remove();
+    popupWindow.remove();
+  });
 
   return popupWindow;
 }
