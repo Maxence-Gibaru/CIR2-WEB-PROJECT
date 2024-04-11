@@ -78,7 +78,6 @@ manipulate();
 prenexIcons.forEach((icon) => {
   // When an icon is clicked
   icon.addEventListener("click", () => {
-    console.log(icon, "clicked");
     // Check if the icon is "calendar-prev"
     // or "calendar-next"
     month = icon.id === "calendar-prev" ? month - 1 : month + 1;

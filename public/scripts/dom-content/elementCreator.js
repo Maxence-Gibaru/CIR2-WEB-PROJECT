@@ -1,3 +1,4 @@
+import { Task, editorButton } from "../task.js";
 import { createPopupWindow, createSubTaskEditor } from "./popupEditor.js";
 
 // Fonction pour créer un imput
@@ -40,10 +41,15 @@ export function createTaskForm(isSubtask = false, parentTaskName = null) {
       const taskName = inputTaskName.value;
       if (isSubtask) {
         // Ici, ajoutez la sous-tâche à la tâche principale spécifiée
-        addSubtask(false, parentTaskName, taskName, choosedDate);
+        let wrapperTask = document.querySelector(".popup-window").querySelector(".wrapper-task");
+        let newTask = new Task(taskName, "in-progress", choosedDate, [])
+        newTask.createTaskNode(wrapperTask, document.querySelector(".popup-window").querySelector(".adder-task"))
       } else {
         // Ajoutez une tâche principale comme avant
-        addTask(taskName, "in-progress", choosedDate);
+        let wrapperTask = document.querySelector(".wrapper-task")
+        let newTask = new Task(taskName, "in-progress", choosedDate, []);
+        newTask.createTaskNode(wrapperTask, editorButton);
+        /* console.log(JSON.stringify(newTask)) */
       }
       taskElement.remove();
     }
@@ -66,10 +72,14 @@ export function createTaskForm(isSubtask = false, parentTaskName = null) {
     const taskName = inputTaskName.value;
     if (isSubtask) {
       // Ici, ajoutez la sous-tâche à la tâche principale spécifiée
-      addSubtask(false, parentTaskName, taskName, choosedDate);
+      let wrapperTask = document.querySelector(".popup-window").querySelector(".wrapper-task");
+      let newTask = new Task(taskName, "in-progress", choosedDate, [])
+      newTask.createTaskNode(wrapperTask, document.querySelector(".popup-window").querySelector(".adder-task"))
     } else {
-      // Ajoutez une tâche principale comme avant
-      addTask(taskName, "in-progress", choosedDate);
+
+      let wrapperTask = document.querySelector(".wrapper-task")
+      let newTask = new Task(taskName, "in-progress", choosedDate, []);
+      newTask.createTaskNode(wrapperTask, editorButton);
     }
     taskElement.remove();
   });
@@ -79,17 +89,17 @@ export function createTaskForm(isSubtask = false, parentTaskName = null) {
   return taskElement;
 }
 
-export function createTaskPanel(taskElement) {
+export function createTaskPanel(taskNode) {
   let popupWindow = createPopupWindow();
 
-  let taskName = taskElement.querySelector(".task-title").textContent;
+  let taskName = taskNode.querySelector(".task-title").textContent;
   createSubTaskEditor(taskName, popupWindow);
   document.body.appendChild(popupWindow);
 
   let subTaskButtonContainer = document.createElement("div");
-  let adderSubTask = createButton("sub-adder-task", "Add a subtask", () => {
+  let adderSubTask = createButton("adder-task", "Add a subtask", () => {
     adderSubTask.style.display = "none";
-    let subTaskForm = createTaskForm(true, taskName);
+    let subTaskForm = createTaskForm(true, taskNode);
     popupWindow.appendChild(subTaskForm);
   });
 
@@ -101,15 +111,11 @@ export function createTaskPanel(taskElement) {
   popupWindow.appendChild(subTaskButtonContainer);
   subTaskButtonContainer.appendChild(adderSubTask);
 
-  // Récupérer et afficher les sous-tâches existantes
-  const tasks = JSON.parse(localStorage.getItem("tasks") || '[]');
-  const task = tasks.find(t => t.name === taskName);
-  console.log(tasks);
+  let wrapperTask = document.createElement("div");
+  wrapperTask.className = "wrapper-task";
 
-  if (task && task.subTasks) {
-    task.subTasks.forEach(subTask => {
-      console.log("bouge");
-      addSubtaskToUI(subTask, popupWindow); // Ajoutez chaque sous-tâche au popup
-    });
-  }
+  popupWindow.appendChild(wrapperTask);
+
+  // Récupérer et afficher les sous-tâches existantes
+
 }

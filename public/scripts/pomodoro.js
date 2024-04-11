@@ -47,8 +47,12 @@ let time = {
         this.displayTime();
         console.log(this.timer);
       }, 1000);
+      
     }
   },
+
+
+
   stop: function () {
     if (this.timer !== null) {
       clearInterval(this.timer);

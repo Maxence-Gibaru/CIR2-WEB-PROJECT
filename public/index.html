@@ -23,7 +23,7 @@
     </div>
 
   </header>
-  
+
   <!-- Sidebar Navigation -->
   <div class="sidebar">
     <div class="sidebar-header">
@@ -53,11 +53,6 @@
 
 
   <div class="main-container">
-    <nav class="navbar">
-
-    </nav>
-
-
     <div class="widget-container">
 
       <section id="pomodoro" class="widget">
@@ -82,7 +77,7 @@
       <section id="tasks" class="task-container widget">
         <h2 class="wrapper-title"><strong>Tasks</strong></h2>
         <div class="task-filter">
-          <button class="button-filter reset">Today</button>
+
           <div class="calendar-container">
             <header class="calendar-header">
               <p class="calendar-current-date"></p>
@@ -146,12 +141,20 @@
     </div>
   </div>
 
-  <script src="scripts/calendar.js"></script>
+  <!-- Main DOM Content Creators -->
+  <script type="module" src="scripts/dom-content/elementCreator.js"></script>
+  <script type="module" src="scripts/dom-content/popupEditor.js"></script>
+
+  <!-- Pomodoro System -->
   <script src="scripts/pomodoro.js"></script>
-  <script type="module" src="scripts/elementCreator.js"></script>
+
+
+  <!-- Task System -->
   <script type="module" src="scripts/data.js"></script>
   <script type="module" src="scripts/task.js"></script>
-  <script type="module" src="scripts/popupEditor.js"></script>
+  <script src="scripts/calendar.js"></script>
+
+  <!-- Project System -->
   <script type="module" src="scripts/project.js"></script>
   <script src="scripts/habitTracker.js"></script>
   <script src="scripts/navbar.js"></script>

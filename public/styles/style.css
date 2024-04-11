@@ -62,22 +62,17 @@ body {
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid var(--grey-line);
-
   gap: 10px;
   min-height: 80px;
 }
 
 .sidebar-logo {
   font-size: 30px;
-  
 }
 
 .sidebar-title {
   color: #333;
-  font-size: 16px;
-  
-  
-  
+  font-size: 16px; 
 }
 
 .sidebar-container {
@@ -330,7 +325,6 @@ body {
 
 .adder-task {
   text-align: center;
-
   color: #808080;
   border: none;
   background-color: transparent;
@@ -353,7 +347,7 @@ body {
 }
 
 .task-input {
-  padding: 10px;
+  padding: 5px;
   border: 1px solid;
   border-radius: 4px;
   margin-right: 10px;

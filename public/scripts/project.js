@@ -1,4 +1,4 @@
-import { createPopupWindow } from "./popupEditor.js";
+import { createPopupWindow } from "./dom-content/popupEditor.js";
 
 let bodyElement = document.body;
 
