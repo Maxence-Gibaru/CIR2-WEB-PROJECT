@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="login">
+    <div class="login__visual">
+      <div class="login__visual--content"></div>
+    </div>
+    <div class="login__action">
+      <div class="login__action--content">
+        <div class="login__action--content__text">
+          <h2>Login</h2>
+          <p>
+            Not registered yet ?
+            <span id="signup-link">Signup here</span>
+          </p>
+        </div>
+        <div class="login__action--content__form">
+          <form id="login-form">
+            <div class="form--content form--email">
+              <label>Email address</label>
+              <input type="email" id="email" required>
+            </div>
+            <div class="form--content form--password">
+              <label>Password</label>
+              <input type="password" id="password" required>
+            </div>
+            <div class="form--content form--submit">
+              <div class="checkbox--content">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Remember me</label>
+              </div>
+              <button type="submit">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
