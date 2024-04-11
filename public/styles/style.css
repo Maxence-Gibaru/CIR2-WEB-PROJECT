@@ -5,11 +5,13 @@
 }
 
 * {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
 }
 
 body {
+  font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Apple Color Emoji", Helvetica, Arial, sans-serif, "Segoe UI Emoji",
+    "Segoe UI Symbol";
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -72,7 +74,7 @@ body {
 
 .sidebar-title {
   color: #333;
-  font-size: 16px; 
+  font-size: 16px;
 }
 
 .sidebar-container {
@@ -176,6 +178,15 @@ body {
   color: var(--blue-color);
 }
 
+.task-button {
+  padding: 10px 15px;
+  background-color: var(--blue-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 .task .task-settings button {
   padding: 10px 15px;
   background-color: var(--blue-color);
@@ -192,6 +203,7 @@ body {
 .task-settings {
   display: flex;
   visibility: hidden;
+  gap: 10px;
 }
 
 .task-properties {
@@ -292,6 +304,7 @@ body {
 }
 
 .wrapper-task {
+  margin: 10px;
   max-height: 150px;
   overflow-y: auto;
   padding: 20px 0;
@@ -478,7 +491,7 @@ p {
   text-align: center;
 }
 
-.button-filter {
+.date-picker {
   position: relative;
   color: var(--blue-color);
   background-color: #fff;
@@ -544,10 +557,11 @@ p {
   left: 0%;
   top: 0%;
   background: #fff;
-  width: 450px;
+  width: 350px;
   border-radius: 10px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
   display: none;
+  z-index: 111111;
 }
 
 .calendar-container header {
@@ -628,6 +642,10 @@ header .calendar-current-date {
   color: #fff;
 }
 
+.calendar-dates li.selected {
+  color: #000;
+}
+
 .calendar-dates li::before {
   position: absolute;
   content: "";
@@ -642,6 +660,10 @@ header .calendar-current-date {
 
 .calendar-dates li.active::before {
   background: var(--blue-color);
+}
+
+.calendar-dates li.selected::before {
+  background: #aaa;
 }
 
 .calendar-dates li:not(.active):hover::before {
