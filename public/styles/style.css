@@ -163,7 +163,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   flex: 1 1 48%;
   padding: 20px;
-  min-height: 305px;
+  max-height: 400px;
 }
 
 .task {
@@ -257,9 +257,7 @@ body {
   padding: 48px;
   text-align: center;
 }
-.pomodoro-content {
-  margin-top: -20px;
-}
+
 
 #pomodoro p {
   font-size: 32px;
@@ -268,32 +266,76 @@ body {
   font-weight: bold;
 }
 
-#number {
-  font-size: 36px;
-  color: var(--blue-color);
-  margin-bottom: 30px;
-}
 
-#pomodoro button {
+
+#pomodoro .control-buttons button {
   padding: 16px 26px;
   border: none;
-  border-radius: 15px;
   background-color: var(--blue-color);
   color: white;
-  font-size: 1em;
   cursor: pointer;
   margin: 0 10px;
-}
-#pomodoro button:hover {
-  scale: 1.1;
+  border-radius: 10px;
 }
 
+#pomodoro .control-buttons button:hover{
+  scale: 1.1;
+}
 #pomodoro #stopButton {
   background-color: #ff6347;
 }
 
 #pomodoro #stopButton:hover {
   scale: 1.1;
+}
+
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto; 
+  width: 200px; 
+  height: 200px; 
+  background-color: white; 
+  border-radius: 50%;
+  border: 5px solid var(--blue-color); 
+  position: relative;
+
+}
+
+
+.time-adjust {
+  background-color: var(--blue-color);
+  color: white;
+  border: 2px solid var(--blue-color);
+  border-radius: 50%;
+  width: 50px; 
+  height: 50px; 
+  font-size: 30px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  top: -15px;
+}
+
+#decrementButton {
+  transform: translateX(-185%) translateY(20%); 
+
+}
+
+#incrementButton {
+  transform: translateX(185%) translateY(20%); 
+}
+
+
+.timer-display {
+  font-size: 2em; 
+  color: var(--blue-color);   
+  z-index: 1;
+
 }
 
 .selection-buttons {
@@ -670,3 +712,5 @@ header .calendar-current-date {
 .calendar-dates li:not(.active):hover::before {
   background: #e4e1e1;
 }
+
+

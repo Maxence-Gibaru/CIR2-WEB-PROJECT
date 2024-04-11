@@ -69,17 +69,25 @@
       </div>
     </div>
 
-    <div class="main-container">
-      <div class="widget-container">
-        <section id="pomodoro" class="widget">
-          <div class="pomodoro-content">
-            <p>Pomodoro</p>
-            <div id="number"></div>
-            <button id="startButton">START</button>
-            <button id="stopButton">STOP</button>
-            <button id="resetButton">RESET</button>
-          </div>
-        </section>
+  <div class="main-container">
+    <div class="widget-container">
+
+      <section id="pomodoro" class="widget">
+        <div class="pomodoro-content">
+            <p>Pomodoro Timer</p>
+            <div class="timer-container">
+                <button id="decrementButton" class="time-adjust">-</button>
+                <div id="timerDisplay" class="timer-display">25:00</div>
+                <button id="incrementButton" class="time-adjust">+</button>
+            </div>
+            <div class="control-buttons">
+                <button id="startButton">START</button>
+                <button id="stopButton">STOP</button>
+                <button id="resetButton">RESET</button>
+            </div>
+        </div>
+    </section>
+    
 
         <section id="tasks" class="task-container widget">
           <h2 class="wrapper-title"><strong>Tasks</strong></h2>
