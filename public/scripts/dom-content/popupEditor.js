@@ -5,7 +5,7 @@ export function createPopupWindow() {
   backgroundOverlay.className = "background-overlay";
   backgroundOverlay.addEventListener("click", () => {
     backgroundOverlay.style.display = "none";
-    popupWindow.style.display = "none";
+    popupWindow.remove();
   });
 
   document.body.appendChild(backgroundOverlay);

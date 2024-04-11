@@ -4,7 +4,7 @@ const authRoutes = require("./routes/auth");
 const app = express();
 
 // Serve static files from the "public" directory
-app.use(express.static("./public"));
+app.use(express.static("../public"));
 
 // Connect to MongoDB
 mongoose
