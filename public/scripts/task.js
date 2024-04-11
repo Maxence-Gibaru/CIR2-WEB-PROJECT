@@ -1,30 +1,30 @@
-
-import { loadTasks, saveTasks } from "./data.js";
-import { addSubtaskToUI, createButton, createInputTask, createTaskForm, createTaskPanel } from "./dom-content/elementCreator.js";
+import { loadTasks, saveTasks, removeTask } from "./data.js";
+import {
+  addSubtaskToUI,
+  createButton,
+  createInputTask,
+  createTaskForm,
+  createTaskPanel,
+} from "./dom-content/elementCreator.js";
 
 let editor = document.querySelector(".adder-task");
 export let editorButton = editor.firstElementChild;
 
 export class Task {
-  constructor(name, state, date, subTasks) {
+  constructor(name, state, date, subTasks, id) {
+    this.id = id;
     this.name = name;
     this.state = state;
-    this.date = date != " " ? "Today" : this.date;
+    this.date = date;
     this.subTasks = subTasks;
   }
 
-  getTaskArray() {
-    return [this.name, this.state, this.date, this.subTasks];
-  }
-
   createTaskNode(parentNode, myEditor, isSubtask = false) {
-
     // Element definition
 
     if (this.name === "") {
       myEditor.style.display = "block";
       return;
-
     }
 
     let taskNode = document.createElement("div");
@@ -41,7 +41,7 @@ export class Task {
 
     let taskDate = document.createElement("div");
 
-    taskDate.textContent = this.date != " " ? "Today" : this.date;
+    taskDate.textContent = this.date;
     taskDate.className = "task-date";
     taskProperties.appendChild(taskDate);
 
@@ -50,8 +50,8 @@ export class Task {
     taskNode.appendChild(taskSettings);
 
     const checkTask = createButton("task-check", "", () => {
-      this.checkTask(taskNode)
-    })
+      this.checkTask(taskNode);
+    });
     taskProperties.insertBefore(checkTask, taskTitle);
 
     const editButton = createButton("task-button-edit", "Edit Task", () => {
@@ -72,9 +72,10 @@ export class Task {
             // Sauvegarder les changements et restaurer le texte original
             taskTitle.textContent = taskNameInput.value;
             taskProperties.replaceChild(taskTitle, taskNameInput);
+            this.name = taskTitle.textContent;
             editButton.textContent = "Edit Task";
             // Sauvegarder la liste mise à jour dans le stockage local
-            saveTasks(taskList);
+            saveTasks(this);
           }
         });
       } else {
@@ -82,9 +83,10 @@ export class Task {
         // Save changes and restore original text
         taskTitle.textContent = taskNameInput.value;
         taskProperties.replaceChild(taskTitle, taskNameInput);
+        this.name = taskTitle.textContent;
         editButton.textContent = "Edit Task";
         // Sauvegarder la liste mise à jour dans le stockage local
-
+        saveTasks(this);
       }
     });
 
@@ -95,17 +97,17 @@ export class Task {
           // Save changes and restore original text
           taskTitle.textContent = taskNameInput.value;
           taskNode.replaceChild(taskTitle, taskNameInput);
+          this.name = taskTitle.textContent;
           editButton.textContent = "Edit Task";
           // Sauvegarder la liste mise à jour dans le stockage local
-          saveTasks(taskList);
+          saveTasks(this);
         }
       });
     }
     taskSettings.appendChild(editButton);
 
-
     const deleteButton = createButton("task-button", "Delete", () => {
-      this.deleteTask(taskNode)
+      this.deleteTask(taskNode);
     });
     taskSettings.appendChild(deleteButton);
     /* Event Listeners */
@@ -118,25 +120,26 @@ export class Task {
 
     parentNode.appendChild(taskNode);
 
-    saveTasks([this])
+    saveTasks(this);
   }
 
   checkTask(taskNode) {
     taskNode.remove();
+    saveTasks(this);
   }
 
   // Function pour delete une task
   deleteTask(taskNode) {
-    taskNode.remove()
+    taskNode.remove();
+    removeTask(this);
   }
-
-
 }
 
 function handleDate() {
-  let buttonFilter = createButton("button-filter", "Today", () => {
+  let buttonFilter = createButton("date-picker", "Today", () => {
     let calendarContainer = document.querySelector(".calendar-container");
-    calendarContainer.style.display = calendarContainer.style.display === "none" ? "block" : "none";
+    calendarContainer.style.display =
+      calendarContainer.style.display === "none" ? "block" : "none";
     const buttonRect = buttonFilter.getBoundingClientRect();
     calendarContainer.style.left = buttonRect.left + "px"; // Position horizontale du bouton
     calendarContainer.style.top = buttonRect.bottom + "px"; // Position verticale juste en dessous bouton
@@ -147,7 +150,6 @@ function handleDate() {
 
 handleDate();
 
-
 // Fonction pour initialiser une tâche
 function toggleTaskCreationForm() {
   editorButton.style.display =
@@ -155,8 +157,6 @@ function toggleTaskCreationForm() {
   const taskForm = editor.querySelector(".task") || createTaskForm();
   editor.appendChild(taskForm);
 }
-
-
 
 // Chargement des tâches lors du chargement de la page
 window.addEventListener("load", loadTasks);
