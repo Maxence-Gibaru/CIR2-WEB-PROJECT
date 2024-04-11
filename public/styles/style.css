@@ -214,7 +214,7 @@ body {
 }
 
 .task-check:hover {
-  background: #6200ee;
+  background: var(--blue-color);
   opacity: 0.7;
   border: 3px solid #333;
 }
@@ -260,7 +260,7 @@ body {
 
 #number {
   font-size: 36px;
-  color: #1458dd;
+  color: var(--blue-color);
   margin-bottom: 30px;
 }
 
@@ -322,7 +322,7 @@ body {
 .late p,
 .done p {
   margin: 0;
-  color: #6200ee;
+  color: var(--blue-color);
   font-weight: 500;
 }
 
