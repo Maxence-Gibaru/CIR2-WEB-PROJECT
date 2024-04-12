@@ -1,149 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neuron</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/public/assets/images/logooo-removebg-preview.png"
+    />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neuron</title>
-  <link rel="icon" type="image/x-icon" href="/public/assets/images/logooo-removebg-preview.png" />
-  <link rel="stylesheet" href="styles/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <body>
+    <header class="top-nav">
+      <div class="nav-spacer">
+        <form class="search">
+          <input
+            type="search"
+            name="search"
+            id="search"
+            placeholder="Search..."
+          />
+        </form>
+        <a class="notifications_button" href="#notifications"
+          ><i class="fas fa-bell"></i
+        ></a>
+        <a class="settings_buttons" href="#settings"
+          ><i class="fas fa-cog"></i
+        ></a>
+      </div>
+    </header>
 
-</head>
-
-<body>
-
-  <header class="top-nav">
-    <div class="nav-spacer">
-      <form class="search">
-        <input type="search" name="search" id="search" placeholder="Search...">
-      </form>
-      <a class="notifications_button" href="#notifications"><i class="fas fa-bell"></i></a>
-      <a class="settings_buttons" href="#settings"><i class="fas fa-cog"></i></a>
-    </div>
-
-  </header>
-
-  <!-- Sidebar Navigation -->
-  <div class="sidebar">
-    <div class="sidebar-header">
-      <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo" />
-      <div class="sidebar-title">
-        <h1>Neuron</h1>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo" />
+        <div class="sidebar-title">
+          <h1>Neuron</h1>
+        </div>
+      </div>
+      <div class="sidebar-container">
+        <div class="sidebar-nav">
+          <a href="#dashboard"><i class="fas fa-th"></i>Dashboard</a>
+          <a href="#projects"
+            ><i class="fas fa-project-diagram"></i>My Projects</a
+          >
+          <a href="#tasks"><i class="fas fa-tasks"></i>Tasks</a>
+          <a href="#pomodoro"><i class="fas fa-clock"></i>Pomodoro</a>
+          <a href="#habit-tracker"
+            ><i class="fas fa-chart-line"></i>Habit Tracker</a
+          >
+          <a href="#calendar"><i class="fas fa-calendar"></i>Calendar</a>
+        </div>
+        <!--Ici faut mettre soit logout si l'utilisateur a sign in ou autre chose mais jsp quoi-->
+        <!-- Go mettre l'utilisateur sign in plutôt -->
+        <div class="sidebar-account">
+          <a href="#logout" class="logout-link"
+            ><i class="far fa-user"></i>Account</a
+          >
+          <p class="username"></p>
+          <p class="mail"></p>
+        </div>
       </div>
     </div>
-    <div class="sidebar-container">
-      <div class="sidebar-nav">
-        <a href="#dashboard"><i class="fas fa-th"></i>Dashboard</a>
-        <a href="#projects"><i class="fas fa-project-diagram"></i>My Projects</a>
-        <a href="#tasks"><i class="fas fa-tasks"></i>Tasks</a>
-        <a href="#pomodoro"><i class="fas fa-clock"></i>Pomodoro</a>
-        <a href="#habit-tracker"><i class="fas fa-chart-line"></i>Habit Tracker</a>
-        <a href="#calendar"><i class="fas fa-calendar"></i>Calendar</a>
-      </div>
-      <!--Ici faut mettre soit logout si l'utilisateur a sign in ou autre chose mais jsp quoi-->
-      <!-- Go mettre l'utilisateur sign in plutôt -->
-      <div class="sidebar-account">
-        <a href="#logout" class="logout-link"><i class="far fa-user"></i>Account</a>
-        <p class="username"></p>
-        <p class="mail"></p>
-      </div>
-    </div>
-  </div>
-
 
   <div class="main-container">
     <div class="widget-container">
 
       <section id="pomodoro" class="widget">
-          <div class ="pomodoro-content">
-            <p>Pomodoro</p>
-            <div id="number"></div>
-            <button id="startButton">START</button>
-            <button id="stopButton">STOP</button>
-            <button id="resetButton">RESET</button>
+        <div class="pomodoro-content">
+            <p>Pomodoro Timer</p>
+            <div class="timer-container">
+                <button id="decrementButton" class="time-adjust">-</button>
+                <div id="timerDisplay" class="timer-display">25:00</div>
+                <button id="incrementButton" class="time-adjust">+</button>
+            </div>
+            <div class="control-buttons">
+                <button id="startButton">START</button>
+                <button id="stopButton">STOP</button>
+                <button id="resetButton">RESET</button>
+            </div>
         </div>
-      </section>
+    </section>
+    
 
-      <section id="tasks" class="task-container widget">
-        <h2 class="wrapper-title"><strong>Tasks</strong></h2>
-        <div class="task-filter">
+        <section id="tasks" class="task-container widget">
+          <h2 class="wrapper-title"><strong>Tasks</strong></h2>
+          <div class="task-filter">
+            <div class="calendar-container">
+              <header class="calendar-header">
+                <p class="calendar-current-date"></p>
+                <div class="calendar-navigation">
+                  <span id="calendar-prev" class="material-symbols-rounded">
+                    chevron_left
+                  </span>
+                  <span id="calendar-next" class="material-symbols-rounded">
+                    chevron_right
+                  </span>
+                </div>
+              </header>
 
-          <div class="calendar-container">
-            <header class="calendar-header">
-              <p class="calendar-current-date"></p>
-              <div class="calendar-navigation">
-                <span id="calendar-prev" class="material-symbols-rounded">
-                  chevron_left
-                </span>
-                <span id="calendar-next" class="material-symbols-rounded">
-                  chevron_right
-                </span>
+              <div class="calendar-body">
+                <ul class="calendar-weekdays">
+                  <li>Sun</li>
+                  <li>Mon</li>
+                  <li>Tue</li>
+                  <li>Wed</li>
+                  <li>Thu</li>
+                  <li>Fri</li>
+                  <li>Sat</li>
+                </ul>
+                <ul class="calendar-dates"></ul>
               </div>
-            </header>
-
-            <div class="calendar-body">
-              <ul class="calendar-weekdays">
-                <li>Sun</li>
-                <li>Mon</li>
-                <li>Tue</li>
-                <li>Wed</li>
-                <li>Thu</li>
-                <li>Fri</li>
-                <li>Sat</li>
-              </ul>
-              <ul class="calendar-dates"></ul>
             </div>
           </div>
-        </div>
-        <div class="wrapper-task">
+          <div class="wrapper-task"> </div>
 
-        </div>
+          <div class="adder-task">
+            <p>Add a task</p>
+          </div>
+        </section>
 
-        <div class="adder-task">
-          <p>Add a task</p>
-        </div>
+        <section id="habit-tracker" class="habit-container widget">
+          <h2>Habit Tracker</h2>
+          <div class="habit-wrapper">
+            <div class="habit">Cold Shower</div>
+            <div class="habit">8 hours of sleep</div>
+            <div class="habit">Reading</div>
+          </div>
+        </section>
 
-      </section>
-
-      <section id="habit-tracker" class="habit-container widget">
-        <h2>Habit Tracker</h2>
-        <div class="habit-wrapper">
-          <div class="habit">Cold Shower</div>
-          <div class="habit">8 hours of sleep</div>
-          <div class="habit">Reading</div>
-        </div>
-      </section>
-
-      <section class="projects widget">
-        <div class="project-intro">
-          <h2>My projects</h2>
-          <button class="project-add reset">+</button>
-        </div>
-        <div class="project-wrapper">
-          <ul>
-            <li>Project 1</li>
-            <li>Project 1</li>
-            <li>Project 1</li>
-          </ul>
-        </div>
-      </section>
-
+        <section class="projects widget">
+          <div class="project-intro">
+            <h2>My projects</h2>
+            <button class="project-add reset">+</button>
+          </div>
+          <div class="project-wrapper">
+            <ul>
+              <li>Project 1</li>
+              <li>Project 1</li>
+              <li>Project 1</li>
+            </ul>
+          </div>
+        </section>
+        <section
+          class="widget"
+          style="
+            display: flex;
+            justify-content: center;
+            font-size: 5vw;
+            align-items: center;
+            font-weight: bold;
+          "
+        >
+          Coming soon...
+        </section>
+      </div>
     </div>
-  </div>
 
-  <!-- Main DOM Content Creators -->
-  <script type="module" src="scripts/dom-content/elementCreator.js"></script>
-  <script type="module" src="scripts/dom-content/popupEditor.js"></script>
+    <!-- Main DOM Content Creators -->
+    <script type="module" src="scripts/dom-content/elementCreator.js"></script>
+    <script type="module" src="scripts/dom-content/popupEditor.js"></script>
 
-  <!-- Pomodoro System -->
-  <script src="scripts/pomodoro.js"></script>
+    <!-- Pomodoro System -->
+    <script src="scripts/pomodoro.js"></script>
 
-
-  <!-- Task System -->
-  <script type="module" src="scripts/data.js"></script>
-  <script type="module" src="scripts/task.js"></script>
-  <script src="scripts/calendar.js"></script>
+    <!-- Task System -->
+    <script type="module" src="scripts/data.js"></script>
+    <script type="module" src="scripts/task.js"></script>
+    <script src="scripts/calendar.js"></script>
 
   <!-- Project System -->
   <script type="module" src="scripts/project.js"></script>
