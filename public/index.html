@@ -16,7 +16,27 @@
     />
   </head>
 
-  <body>
+  <script>
+    fetch('/api/session')
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url; // Redirection de l'utilisateur vers la page de connexion
+                } else {
+                    return response.json(); // Traitement normal de la réponse
+                }
+            })
+            .then(data => {
+                document.getElementById("content").classList.remove("hidden");
+            })
+            .catch(error => {
+                console.error('Error checking session:', error);
+            });
+  </script>
+
+  <style> .hidden {
+    display: none;
+}</style>
+  <body class="hidden">
     <header class="top-nav">
       <div class="nav-spacer">
         <form class="search">
@@ -34,6 +54,8 @@
           ><i class="fas fa-cog"></i
         ></a>
       </div>
+      <button id="logout-button">Déconnexion</button>
+
     </header>
 
     <!-- Sidebar Navigation -->
@@ -203,21 +225,21 @@
   <script src="scripts/habitTracker.js"></script>
   <script src="scripts/navbar.js"></script>
 
-  <script> 
-  fetch('/api/session')
-  .then(response => {
-    if (response.redirected) {
-      window.location.href = response.url; // Redirection de l'utilisateur vers la page de connexion
-    } else {
-      return response.json(); // Traitement normal de la réponse
-    }
-  })
-  .then(data => {
-    // Traitement des données de la session si nécessaire
-  })
-  .catch(error => {
-    console.error('Error checking session:', error);
-  });
+  <script>
+  document.getElementById("logout-button").addEventListener("click", function() {
+    fetch("http://localhost:3000/api/logout", {
+        method: "GET",
+        credentials: "include",
+    })
+    .then((response) => response.json())
+    .then(data => {
+        // Rediriger vers la page de connexion après la déconnexion
+        window.location.href = "http://localhost:3000/login.html";
+    })
+    .catch((error) => {
+        console.error("Error logging out:", error);
+    });
+});
 
   </script>
 </body>
