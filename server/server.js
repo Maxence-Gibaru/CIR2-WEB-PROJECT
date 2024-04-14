@@ -60,25 +60,32 @@ const UserSchema = new mongoose.Schema({
 const User = mongoose.model('User', UserSchema);
 
 // Route d'inscription
-app.post('/api/signup', (req, res) => {
+// Route d'inscription
+app.post('/api/signup', async (req, res) => {
   const { username, email, password } = req.body;
 
-  const newUser = new User({
-    username,
-    email,
-    password,
-  });
+  // Check if user with provided email already exists
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).send('User with this email already exists');
+    }
 
-  newUser
-    .save()
-    .then(() => {
-      req.session.user = newUser; // Stocke l'utilisateur dans la session
-      res.send('Signup successful');
-    })
-    .catch((error) => {
-      res.status(500).send('Signup failed');
+    // If user does not exist, create a new user
+    const newUser = new User({
+      username,
+      email,
+      password,
     });
+
+    await newUser.save();
+    req.session.user = newUser; // Stocke l'utilisateur dans la session
+    res.send('Signup successful');
+  } catch (error) {
+    res.status(500).send('Signup failed');
+  }
 });
+
 
 // Route de connexion
 app.post('/api/login', async (req, res) => {
@@ -112,18 +119,40 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-
-
-// Route pour vérifier l'état de la session et récupérer l'utilisateur connecté
-// Route pour vérifier l'état de la session et récupérer l'utilisateur connecté
 app.get('/api/session', (req, res) => {
   if (req.session.user) {
     res.status(200).json({ loggedIn: true, user: req.session.user });
   } else {
-    res.status(302).set('Location', 'http://localhost:3000/login.html').end(); // Redirection vers la page de connexion
+    if (req.originalUrl !== '/login.html') { // Vérifier si l'utilisateur essaie d'accéder à login.html
+      res.status(302).set('Location', 'http://localhost:3000/login.html').end(); // Redirection vers la page de connexion
+    } else {
+      res.status(200).json({ loggedIn: false }); // L'utilisateur est déjà sur la page de connexion
+    }
   }
 });
 
+// Route de déconnexion
+app.get('/api/logout', (req, res) => {
+  req.session.destroy((err) => {
+      if (err) {
+          console.error('Error destroying session:', err);
+          res.status(500).json({ message: 'Error destroying session' });
+      } else {
+          res.status(200).json({ message: 'Logout successful' });
+      }
+  });
+});
+
+// Route de la page d'accueil
+app.get('/', (req, res) => {
+  if (req.session.user) {
+      // Si l'utilisateur est connecté, renvoyer la page normalement
+      res.sendFile(__dirname + '/index.html');
+  } else {
+      // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
+      res.redirect('/login.html');
+  }
+});
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
