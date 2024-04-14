@@ -113,7 +113,7 @@ export class Task {
     /* Event Listeners */
 
     taskTitle.addEventListener("click", () => {
-      createTaskPanel(taskNode);
+      createTaskPanel(this);
     });
 
     myEditor.style.display = "block";
@@ -124,6 +124,7 @@ export class Task {
   }
 
   checkTask(taskNode) {
+    this.state = "done";
     taskNode.remove();
     saveTasks(this);
   }

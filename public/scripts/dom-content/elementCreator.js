@@ -28,7 +28,7 @@ export function addSubtaskToUI(subTask, popupWindow) {
 }
 
 // Fonction pour créer les éléments d'une tâches
-export function createTaskForm(isSubtask = false) {
+export function createTaskForm(parentTask = null, isSubtask = false) {
   let choosedDate;
 
   const taskElement = document.createElement("div");
@@ -42,20 +42,28 @@ export function createTaskForm(isSubtask = false) {
       const taskName = inputTaskName.value;
       if (isSubtask) {
         // Ici, ajoutez la sous-tâche à la tâche principale spécifiée
-        let wrapperTask = document
-          .querySelector(".popup-window")
-          .querySelector(".wrapper-task");
-        let newTask = new Task(
-          taskName,
-          "in-progress",
-          choosedDate,
-          [],
-          hashCode(`${taskName}-${Date.now()}`).toString()
-        );
-        newTask.createTaskNode(
-          wrapperTask,
-          document.querySelector(".popup-window").querySelector(".adder-task")
-        );
+        if (parentTask) {
+          let wrapperTask = document
+            .querySelector(".popup-window")
+            .querySelector(".wrapper-task");
+          let newSubTask = new Task(
+            taskName,
+            "in-progress",
+            choosedDate,
+            [],
+            hashCode(`${taskName}-${Date.now()}`).toString()
+          );
+
+          parentTask.subTasks.push(newSubTask);
+          console.log(parentTask);
+
+          newSubTask.createTaskNode(
+            wrapperTask,
+            document.querySelector(".popup-window").querySelector(".adder-task"),
+            true
+          );
+        }
+
       } else {
         // Ajoutez une tâche principale comme avant
         let wrapperTask = document.querySelector(".wrapper-task");
@@ -160,7 +168,7 @@ export function createTaskPanel(taskNode) {
   let subTaskButtonContainer = document.createElement("div");
   let adderSubTask = createButton("adder-task", "Add a subtask", () => {
     adderSubTask.style.display = "none";
-    let subTaskForm = createTaskForm(true, taskNode);
+    let subTaskForm = createTaskForm(taskNode, true);
     popupWindow.appendChild(subTaskForm);
   });
 

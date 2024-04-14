@@ -2,7 +2,7 @@ import { Task, editorButton } from "./task.js";
 
 export function saveTasks(newTask) {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  console.log(newTask);
+
 
   let taskIndex = tasks.findIndex((t) => t.id === newTask.id);
 
@@ -13,6 +13,8 @@ export function saveTasks(newTask) {
   }
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
+
+
 
 // Fonction pour charger les tâches à partir du stockage local
 export function loadTasks() {
