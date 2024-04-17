@@ -11,15 +11,16 @@ let editor = document.querySelector(".adder-task");
 export let editorButton = editor.firstElementChild;
 
 export class Task {
-  constructor(name, state, date, subTasks, id) {
+  constructor(name, state, date, subTasks, id, isSubTask = false) {
     this.id = id;
     this.name = name;
     this.state = state;
     this.date = date;
     this.subTasks = subTasks;
+    this.isSubTask = isSubTask;
   }
 
-  createTaskNode(parentNode, myEditor, isSubtask = false) {
+  createTaskNode(parentNode, myEditor) {
     // Element definition
 
     if (this.name === "") {
@@ -113,7 +114,7 @@ export class Task {
     /* Event Listeners */
 
     taskTitle.addEventListener("click", () => {
-      createTaskPanel(this);
+      createTaskPanel(this, taskNode);
     });
 
     myEditor.style.display = "block";
@@ -148,6 +149,17 @@ function handleDate() {
   buttonFilter.classList.add = "reset";
   document.querySelector(".task-filter").appendChild(buttonFilter);
 }
+
+
+// à développer plus tard
+/* function findTaskByIndex(taskNode) {
+  let taskElement;
+
+  taskNode.id
+
+
+  return taskElement;
+} */
 
 handleDate();
 

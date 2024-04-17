@@ -19,8 +19,6 @@ export function saveTasks(newTask) {
 // Fonction pour charger les tâches à partir du stockage local
 export function loadTasks() {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  console.log(tasks);
-
   tasks.forEach((task) => {
     let taskObject = new Task(
       task.name,
@@ -29,9 +27,13 @@ export function loadTasks() {
       task.subTasks,
       task.id
     );
-    let wrapperTask = document.querySelector(".wrapper-task");
 
-    taskObject.createTaskNode(wrapperTask, editorButton);
+
+    var wrapperTask = document.querySelector(".wrapper-task");
+
+    if (!taskObject.isSubTask) {
+      taskObject.createTaskNode(wrapperTask, editorButton);
+    }
   });
 }
 
