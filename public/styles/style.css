@@ -1,18 +1,17 @@
 :root {
-  --blue-color: #7650e0;
+  --blue-color: rgb(182, 157, 230);
   --grey-line: #e3e8ee;
   --window-bg: #f8f9fa;
 }
 
 * {
+  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  margin: 0;
   box-sizing: border-box;
 }
 
 body {
-  font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Apple Color Emoji", Helvetica, Arial, sans-serif, "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -38,6 +37,7 @@ body {
   padding: 10px 0;
   border: 1px solid var(--grey-line);
 }
+
 .sidebar-logo {
   width: 40px;
   height: auto;
@@ -72,9 +72,10 @@ body {
   font-size: 30px;
 }
 
-.sidebar-title {
+.sidebar-title h1 {
   color: #333;
-  font-size: 16px;
+  font-weight: 1000;
+
 }
 
 .sidebar-container {
@@ -278,9 +279,10 @@ body {
   border-radius: 10px;
 }
 
-#pomodoro .control-buttons button:hover{
+#pomodoro .control-buttons button:hover {
   scale: 1.1;
 }
+
 #pomodoro #stopButton {
   background-color: #ff6347;
 }
@@ -294,12 +296,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 20px auto; 
-  width: 200px; 
-  height: 200px; 
-  background-color: white; 
+  margin: 20px auto;
+  width: 200px;
+  height: 200px;
+  background-color: white;
   border-radius: 50%;
-  border: 5px solid var(--blue-color); 
+  border: 5px solid var(--blue-color);
   position: relative;
 
 }
@@ -310,9 +312,9 @@ body {
   color: white;
   border: 2px solid var(--blue-color);
   border-radius: 50%;
-  width: 50px; 
-  height: 50px; 
-  font-size: 30px; 
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -322,18 +324,18 @@ body {
 }
 
 #decrementButton {
-  transform: translateX(-185%) translateY(20%); 
+  transform: translateX(-185%) translateY(20%);
 
 }
 
 #incrementButton {
-  transform: translateX(185%) translateY(20%); 
+  transform: translateX(185%) translateY(20%);
 }
 
 
 .timer-display {
-  font-size: 2em; 
-  color: var(--blue-color);   
+  font-size: 2em;
+  color: var(--blue-color);
   z-index: 1;
 
 }
@@ -341,6 +343,7 @@ body {
 .selection-buttons {
   margin: 10px 0;
 }
+
 .task-container {
   display: flex;
   flex-direction: column;
@@ -569,8 +572,7 @@ p {
   font-family: "Material Symbols Rounded";
   font-style: normal;
   font-weight: 100 700;
-  src: url(https://fonts.gstatic.com/s/materialsymbolsrounded/v168/sykg-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190Fjzag.woff2)
-    format("woff2");
+  src: url(https://fonts.gstatic.com/s/materialsymbolsrounded/v168/sykg-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190Fjzag.woff2) format("woff2");
 }
 
 .material-symbols-rounded {
@@ -712,5 +714,3 @@ header .calendar-current-date {
 .calendar-dates li:not(.active):hover::before {
   background: #e4e1e1;
 }
-
-

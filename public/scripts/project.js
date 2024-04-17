@@ -60,4 +60,4 @@ function loadProjects() {
   });
 }
 
-buttonAdd.addEventListener("click", showPanel);
+/* buttonAdd.addEventListener("click", showPanel); */

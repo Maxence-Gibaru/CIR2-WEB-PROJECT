@@ -21,14 +21,11 @@ export function createButton(className, textContent, clickHandler) {
 
 // Cette fonction est un exemple de comment vous pourriez ajouter une sous-tâche à l'UI du popup
 export function addSubtaskToUI(subTask, popupWindow) {
-  let subTaskElement = document.createElement("div");
-  subTaskElement.textContent = subTask.name; // Ajoutez plus de détails selon votre UI
-  // Ajoutez ici plus de logique si nécessaire, par exemple des boutons pour modifier/supprimer la sous-tâche
-  popupWindow.appendChild(subTaskElement);
+  subTask.createTaskNode(popupWindow, editorButton);
 }
 
 // Fonction pour créer les éléments d'une tâches
-export function createTaskForm(isSubtask = false) {
+export function createTaskForm(parentTask = null, isSubtask = false) {
   let choosedDate;
 
   const taskElement = document.createElement("div");
@@ -42,20 +39,28 @@ export function createTaskForm(isSubtask = false) {
       const taskName = inputTaskName.value;
       if (isSubtask) {
         // Ici, ajoutez la sous-tâche à la tâche principale spécifiée
-        let wrapperTask = document
-          .querySelector(".popup-window")
-          .querySelector(".wrapper-task");
-        let newTask = new Task(
-          taskName,
-          "in-progress",
-          choosedDate,
-          [],
-          hashCode(`${taskName}-${Date.now()}`).toString()
-        );
-        newTask.createTaskNode(
-          wrapperTask,
-          document.querySelector(".popup-window").querySelector(".adder-task")
-        );
+        if (parentTask) {
+          let wrapperTask = document
+            .querySelector(".popup-window")
+            .querySelector(".wrapper-task");
+          let newSubTask = new Task(
+            taskName,
+            "in-progress",
+            choosedDate,
+            [],
+            hashCode(`${taskName}-${Date.now()}`).toString(),
+            true
+          );
+
+          parentTask.subTasks.push(newSubTask);
+
+          newSubTask.createTaskNode(
+            wrapperTask,
+            document.querySelector(".popup-window").querySelector(".adder-task"),
+            true
+          );
+        }
+
       } else {
         // Ajoutez une tâche principale comme avant
         let wrapperTask = document.querySelector(".wrapper-task");
@@ -150,17 +155,19 @@ export function createTaskForm(isSubtask = false) {
   return taskElement;
 }
 
-export function createTaskPanel(taskNode) {
+export function createTaskPanel(taskObject, taskNode) {
   let popupWindow = createPopupWindow();
 
   let taskName = taskNode.querySelector(".task-title").textContent;
   createSubTaskEditor(taskName, popupWindow);
   document.body.appendChild(popupWindow);
 
+  taskObject.subTasks.forEach((t) => { addSubtaskToUI(t, popupWindow) });
+
   let subTaskButtonContainer = document.createElement("div");
   let adderSubTask = createButton("adder-task", "Add a subtask", () => {
     adderSubTask.style.display = "none";
-    let subTaskForm = createTaskForm(true, taskNode);
+    let subTaskForm = createTaskForm(taskObject, true);
     popupWindow.appendChild(subTaskForm);
   });
 
