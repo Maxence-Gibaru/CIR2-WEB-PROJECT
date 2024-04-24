@@ -17,7 +17,7 @@ navLinks.forEach((link) => {
     if (targetId != "dashboard") {
       allSections.forEach((section) => {
         section.style.display = "none";
-      });
+      });    
     } else {
       allSections.forEach((section) => {
         section.style.display = "block";
