@@ -94,7 +94,7 @@ body {
   padding: 15px 20px;
 }
 
-.sidebar a:hover {
+.sidebar-container a:hover {
   background: var(--blue-color);
   border-radius: 10px;
   text-decoration: none;

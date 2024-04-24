@@ -18,18 +18,20 @@
         <form class="search">
           <input type="search" name="search" id="search" placeholder="Search..." />
         </form>
-        <a class="notifications_button" href="#notifications"><i class="fas fa-bell"></i></a>
-        <a class="settings_buttons" href="#settings"><i class="fas fa-cog"></i></a>
+        <!-- <a class="notifications_button" href="#notifications"><i class="fas fa-bell"></i></a>
+        <a class="settings_buttons" href="#settings"><i class="fas fa-cog"></i></a> <-->
       </div>
       <button id="logout-button" class="task-button">Déconnexion</button>
     </header>
 
     <div class="sidebar">
       <div class="sidebar-header">
-        <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo" />
-        <div class="sidebar-title">
-          <h1>Neuron</h1>
-        </div>
+        <a class="LogoReturn" href="#dashboard">
+          <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo" />
+          <div class="sidebar-title">
+            <h1>Neuron</h1>
+          </div>
+        </a>
       </div>
       <div class="sidebar-container">
         <div class="sidebar-nav">
@@ -128,6 +130,9 @@
   <script type="module" src="scripts/project.js"></script>
   <script src="scripts/habitTracker.js"></script>
   <script src="scripts/navbar.js"></script>
+
+  <!-- Disconnect System -->
+  <script src="scripts/logout.js"></script>
 
 </body>
 
