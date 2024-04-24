@@ -242,3 +242,15 @@ input:focus {
   width: auto;
   margin: 20px;
 }
+
+.st01 {
+  fill: #fff;
+}
+
+.st0 {
+  fill: none;
+}
+
+.st1 {
+  fill: #010101;
+}

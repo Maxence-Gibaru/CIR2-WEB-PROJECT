@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
 
-// Configurations et middleware
-
 // Routes
 app.use("/api", require("./routes/auth"));
 

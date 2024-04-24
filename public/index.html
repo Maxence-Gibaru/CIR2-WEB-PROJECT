@@ -8,30 +8,8 @@
   <link rel="icon" type="image/x-icon" href="/public/assets/images/logooo-removebg-preview.png" />
   <link rel="stylesheet" href="styles/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="scripts/loginSys.js"></script>
 </head>
-
-<script>
-  fetch('/api/session')
-    .then(response => {
-      if (response.redirected) {
-        window.location.href = response.url;
-      } else {
-        return response.json();
-      }
-    })
-    .then(data => {
-      document.getElementById("content").classList.remove("hidden");
-    })
-    .catch(error => {
-      console.error('Error checking session:', error);
-    });
-</script>
-
-<style>
-  .hidden {
-    display: none;
-  }
-</style>
 
 <body>
   <div id="content" class="hidden">
@@ -44,10 +22,8 @@
         <a class="settings_buttons" href="#settings"><i class="fas fa-cog"></i></a>
       </div>
       <button id="logout-button" class="task-button">Déconnexion</button>
-
     </header>
 
-    <!-- Sidebar Navigation -->
     <div class="sidebar">
       <div class="sidebar-header">
         <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo" />
@@ -64,8 +40,6 @@
           <a href="#habit-tracker"><i class="fas fa-chart-line"></i>Habit Tracker</a>
           <a href="#calendar"><i class="fas fa-calendar"></i>Calendar</a>
         </div>
-        <!--Ici faut mettre soit logout si l'utilisateur a sign in ou autre chose mais jsp quoi-->
-        <!-- Go mettre l'utilisateur sign in plutôt -->
         <div class="sidebar-account">
           <a href="#logout" class="logout-link"><i class="far fa-user"></i>Account</a>
           <p class="username"></p>
@@ -74,21 +48,17 @@
       </div>
     </div>
 
-      <div class="main-container">
-        <div class="widget-container">
-          <section id="pomodoro" class="widget">
-            <div class="pomodoro-content">
+    <div class="main-container">
+      <div class="widget-container">
+        <section id="pomodoro" class="widget">
+          <div class="pomodoro-content">
             <p>Pomodoro Timer</p>
             <div class="timer-container">
               <button id="decrementButton" class="time-adjust">-</button>
               <div id="timerDisplay" class="timer-display">25:00</div>
               <button id="incrementButton" class="time-adjust">+</button>
-              <button id="decrementButton" class="time-adjust">-</button>
-              <div id="timerDisplay" class="timer-display">25:00</div>
-              <button id="incrementButton" class="time-adjust">+</button>
             </div>
             <div class="control-buttons">
-              <!-- <button id="resetButton">RESET</button> -->
             </div>
           </div>
         </section>
@@ -138,37 +108,7 @@
               font-weight: bold;
             " id="habit-tracker" class="habit-container widget">
           Coming soon...
-          <!-- <h2>Habit Tracker</h2>
-            <div class="habit-wrapper">
-              <div class="habit">Cold Shower</div>
-              <div class="habit">8 hours of sleep</div>
-              <div class="habit">Reading</div>
-            </div> -->
         </section>
-
-        <!--         <section class="projects widget" style="
-              display: flex;
-              justify-content: center;
-              font-size: 5vw;
-              align-items: center;
-              font-weight: bold;
-            " id="habit-tracker" class="habit-container widget">
-          <div class="project-wrapper">
-            <ul>
-              <li>Project 1</li>
-              <li>Project 1</li>
-              <li>Project 1</li>
-            </ul>
-        </section>
-        <section class="widget" style="
-              display: flex;
-              justify-content: center;
-              font-size: 5vw;
-              align-items: center;
-              font-weight: bold;
-            ">
-          Coming soon...
-        </section> -->
       </div>
     </div>
   </div>
@@ -176,8 +116,8 @@
   <script type="module" src="scripts/dom-content/elementCreator.js"></script>
   <script type="module" src="scripts/dom-content/popupEditor.js"></script>
 
-    <!-- Pomodoro System -->
-    <script type="module" src="scripts/pomodoro.js"></script>
+  <!-- Pomodoro System -->
+  <script type="module" src="scripts/pomodoro.js"></script>
 
   <!-- Task System -->
   <script type="module" src="scripts/data.js"></script>
@@ -189,23 +129,6 @@
   <script src="scripts/habitTracker.js"></script>
   <script src="scripts/navbar.js"></script>
 
-  <script>
-    document.getElementById("logout-button").addEventListener("click", function () {
-      fetch("http://localhost:3000/api/logout", {
-        method: "GET",
-        credentials: "include",
-      })
-        .then((response) => response.json())
-        .then(data => {
-          // Rediriger vers la page de connexion après la déconnexion
-          window.location.href = "http://localhost:3000/login.html";
-        })
-        .catch((error) => {
-          console.error("Error logging out:", error);
-        });
-    });
-
-  </script>
 </body>
 
 </html>

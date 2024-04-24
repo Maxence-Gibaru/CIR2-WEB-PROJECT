@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("Error logging in:", error);
     });
 });
-    // Vérifier si l'utilisateur est déjà connecté au chargement de la page
     fetch("http://localhost:3000/api/session")
       .then((response) => response.json())
       .then(data => {
@@ -52,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("Error checking session:", error);
       });
     const navigate = function() {
-      window.location.href = "/signup.html"; // Redirige l'utilisateur vers la page de signup
+      window.location.href = "/signup.html";
     };
   
     document.getElementById("signup-link").addEventListener("click", navigate);
@@ -83,6 +82,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
   });
-  
-
-  
