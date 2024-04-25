@@ -70,7 +70,7 @@ let pomodoroButton = createButton("startButton", "Start", () => {
     pomodoroButton.style.backgroundColor = "#000";
     time.start();
   } else {
-    pomodoroButton.style.backgroundColor = "#7650e0";
+    pomodoroButton.style.backgroundColor = document.documentElement.style.getPropertyValue('--main-color');
     pomodoroButton.textContent = "Resume";
     time.stop();
   }

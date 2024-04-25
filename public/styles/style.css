@@ -44,6 +44,10 @@ body {
   border: 1px solid var(--grey-line);
 }
 
+.LogoReturn {
+  gap: 10px;
+}
+
 .sidebar-logo {
   width: 40px;
   height: auto;
@@ -198,6 +202,7 @@ body {
 }
 
 .task {
+  padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -798,6 +803,15 @@ header .calendar-current-date {
   color: #fff;
   cursor: pointer;
   border: solid 1px #BA68C8
+}
+
+.popup-markdown-description {
+  height: 150px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid var(--grey-line);
+  margin: 20px;
 }
 
 #saveProfile button {
