@@ -44,36 +44,86 @@ mongoose
     console.log('MongoDB Atlas connection error:', error);
   });
 
-const UserSchema = new mongoose.Schema({
-  username: String,
-  email: String,
-  password: String,
-});
-
-const User = mongoose.model('User', UserSchema);
-
-app.post('/api/signup', async (req, res) => {
-  const { username, email, password } = req.body;
-
-  try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).send('User with this email already exists');
+  const ProfileSchema = new mongoose.Schema({
+    email: String,
+    firstName: String,
+    lastName: String,
+    age: Number,
+    profileImage: String,
+    colorPreference: String,
+  });
+  
+  const Profile = mongoose.model('profiles', ProfileSchema); // Modifier le nom du modèle
+  
+  const UserSchema = new mongoose.Schema({
+    username: String,
+    email: String,
+    password: String,
+    profiles: { type: mongoose.Schema.Types.ObjectId, ref: 'profiles' } // Modifier la référence du schéma
+  });
+  
+  const User = mongoose.model('User', UserSchema);
+  
+  app.post('/api/profiles', async (req, res) => {
+    const { email, firstName, lastName, age } = req.body;
+  
+    try {
+      let profile = await Profile.findOne({ email });
+  
+      if (!profile) {
+        profile = new Profile({
+          email,
+          firstName,
+          lastName,
+          age
+        });
+      } else {
+        profile.firstName = firstName;
+        profile.lastName = lastName;
+        profile.age = age;
+      }
+  
+      await profile.save();
+      await User.findOneAndUpdate({ email }, { profiles: profile._id }); // Mettre à jour le champ profiles
+  
+      res.status(200).json({ message: 'Profile updated successfully' });
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      res.status(500).json({ message: 'Failed to update profile' });
     }
-
-    const newUser = new User({
-      username,
-      email,
-      password,
-    });
-
-    await newUser.save();
-    req.session.user = newUser;
-    res.send('Signup successful');
-  } catch (error) {
-    res.status(500).send('Signup failed');
-  }
-});
+  });
+  
+  app.post('/api/signup', async (req, res) => {
+    const { username, email, password } = req.body;
+  
+    try {
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).send('User with this email already exists');
+      }
+  
+      const newUser = new User({
+        username,
+        email,
+        password,
+      });
+  
+      await newUser.save();
+    
+      const newProfile = new Profile({
+        email: email,
+      });
+  
+      await newProfile.save();
+      newUser.profiles = newProfile._id;
+      await newUser.save();
+  
+      req.session.user = newUser;
+      res.send('Signup successful');
+    } catch (error) {
+      res.status(500).send('Signup failed');
+    }
+  });
 
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
