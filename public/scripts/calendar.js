@@ -51,8 +51,8 @@ const manipulate = () => {
     // Check if the current date is today
     let isToday =
       i === date.getDate() &&
-        month === new Date().getMonth() &&
-        year === new Date().getFullYear()
+      month === new Date().getMonth() &&
+      year === new Date().getFullYear()
         ? "active"
         : "";
     lit += `<li class="${isToday}">${i}</li>`;
@@ -113,8 +113,7 @@ prenexIcons.forEach((icon) => {
   });
 });
 
-
-document.addEventListener('DOMContentLoaded', function () {
+/* document.addEventListener('DOMContentLoaded', function () {
   var calendarEl = document.getElementById('calendar');
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth', // Vue par mois avec les jours
@@ -132,3 +131,4 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   calendar.render();
 });
+ */

@@ -56,11 +56,12 @@ export function createTaskForm(parentTask = null, isSubtask = false) {
 
           newSubTask.createTaskNode(
             wrapperTask,
-            document.querySelector(".popup-window").querySelector(".adder-task"),
+            document
+              .querySelector(".popup-window")
+              .querySelector(".adder-task"),
             true
           );
         }
-
       } else {
         // Ajoutez une tâche principale comme avant
         let wrapperTask = document.querySelector(".wrapper-task");
@@ -122,20 +123,27 @@ export function createTaskForm(parentTask = null, isSubtask = false) {
     const taskName = inputTaskName.value;
     if (isSubtask) {
       // Ici, ajoutez la sous-tâche à la tâche principale spécifiée
-      let wrapperTask = document
-        .querySelector(".popup-window")
-        .querySelector(".wrapper-task");
-      let newTask = new Task(
-        taskName,
-        "in-progress",
-        choosedDate,
-        [],
-        hashCode(`${taskName}-${Date.now()}`).toString()
-      );
-      newTask.createTaskNode(
-        wrapperTask,
-        document.querySelector(".popup-window").querySelector(".adder-task")
-      );
+      if (parentTask) {
+        let wrapperTask = document
+          .querySelector(".popup-window")
+          .querySelector(".wrapper-task");
+        let newSubTask = new Task(
+          taskName,
+          "in-progress",
+          choosedDate,
+          [],
+          hashCode(`${taskName}-${Date.now()}`).toString(),
+          true
+        );
+
+        parentTask.subTasks.push(newSubTask);
+
+        newSubTask.createTaskNode(
+          wrapperTask,
+          document.querySelector(".popup-window").querySelector(".adder-task"),
+          true
+        );
+      }
     } else {
       let wrapperTask = document.querySelector(".wrapper-task");
       let newTask = new Task(
@@ -162,14 +170,19 @@ export function createTaskPanel(taskObject, taskNode) {
   createSubTaskEditor(taskName, popupWindow);
   document.body.appendChild(popupWindow);
 
-  taskObject.subTasks.forEach((t) => { addSubtaskToUI(t, popupWindow) });
+  taskObject.subTasks.forEach((t) => {
+    addSubtaskToUI(t, popupWindow);
+  });
 
   let subTaskButtonContainer = document.createElement("div");
   subTaskButtonContainer.className = "sub-button-container";
   let adderSubTask = createButton("adder-task", "Add a subtask", () => {
     adderSubTask.style.display = "none";
     let subTaskForm = createTaskForm(taskObject, true);
-    popupWindow.insertBefore(subTaskForm, popupWindow.querySelector(".wrapper-task"));
+    popupWindow.insertBefore(
+      subTaskForm,
+      popupWindow.querySelector(".wrapper-task")
+    );
   });
 
   /* const taskIndex = tasks.findIndex((task) => task.name === taskName);
