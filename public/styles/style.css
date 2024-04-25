@@ -807,6 +807,12 @@ header .calendar-current-date {
   border: var(--main-color);
 }
 
+#calendar {
+  min-height: none;
+  max-height: none;
+  
+}
+
 #calendar a {
   color: var(--main-color);
 }

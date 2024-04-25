@@ -2,7 +2,7 @@ import { Task, editorButton } from "../task.js";
 import { createPopupWindow, createSubTaskEditor } from "./popupEditor.js";
 import { hashCode } from "../utils.js";
 import { calendar } from "../calendar-ui.js";
-
+import { months } from "../calendar.js";
 
 // Fonction pour créer un imput
 export function createInputTask() {
@@ -78,7 +78,7 @@ export function createTaskForm(parentTask = null, isSubtask = false) {
 
         calendar.addEvent({
           title: newTask.name,
-          start: "2024-04-25",
+          start: newTask.date,
           allDay: true,
         })
         /* console.log(JSON.stringify(newTask)) */
@@ -96,6 +96,20 @@ export function createTaskForm(parentTask = null, isSubtask = false) {
     calendarContainer.style.top = buttonRect.bottom + "px"; // Position verticale juste en dessous bouton
 
     let days = calendarContainer.querySelectorAll(".calendar-dates li");
+    let currentDate = document.querySelector(".calendar-current-date").textContent.split(" ");
+    for (let i = 1; i < 13; i++) {
+      if (currentDate[0] === months[i - 1]) {
+        if (i < 10) {
+          var monthIndex = "0" + i;
+        } else {
+          var monthIndex = i;
+        }
+
+      }
+    }
+    console.log(monthIndex)
+
+    console.log(currentDate[1])
 
     days.forEach((d) => {
       d.addEventListener("click", () => {
@@ -111,7 +125,8 @@ export function createTaskForm(parentTask = null, isSubtask = false) {
         d.classList.add("selected");
 
         // Mettre à jour la date choisie et l'afficher
-        choosedDate = d.textContent;
+        choosedDate = String(currentDate[1] + "-" + monthIndex + "-" + d.textContent);
+        console.log(choosedDate);
         deadLineDate.textContent = choosedDate;
 
         calendarContainer.style.display = "none";
@@ -164,7 +179,7 @@ export function createTaskForm(parentTask = null, isSubtask = false) {
       newTask.createTaskNode(wrapperTask, editorButton);
       calendar.addEvent({
         title: newTask.name,
-        start: "2024-04-25",
+        start: newTask.date,
         allDay: true,
       })
     }

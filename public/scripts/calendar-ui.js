@@ -4,7 +4,7 @@ export let calendar;
 document.addEventListener('DOMContentLoaded', function () {
   var calendarEl = document.getElementById('calendar');
   calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
+    initialView: 'timeGridWeek',
     height: 'auto', // Ajuste automatiquement la hauteur pour éviter le débordement
     headerToolbar: {
       left: 'prev,next today',

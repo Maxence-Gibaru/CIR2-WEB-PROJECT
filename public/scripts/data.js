@@ -31,7 +31,7 @@ export function loadTasks() {
 
     calendar.addEvent({
       title: task.name,
-      start: '2024-04-25',
+      start: task.date,
       allDay: true
     })
 
