@@ -1,7 +1,7 @@
 :root {
-  --blue-color: rgb(182, 157, 230);
+  --blue-color: #7f7aee;
   --grey-line: #e3e8ee;
-  --window-bg: #f8f9fa;
+  --window-bg: #f8f9fa; 
 }
 
 * {
