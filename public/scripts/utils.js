@@ -18,3 +18,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
+
+
+
+export function showMarkdownPreview(markdownText, popupWindow) {
+  let htmlContent = marked(markdownText);
+  let previewDiv = document.createElement('div');
+  previewDiv.className = 'markdown-preview';
+  previewDiv.innerHTML = htmlContent;
+
+  popupWindow.appendChild(previewDiv);
+
+  // Faites quelque chose avec previewDiv, comme l'ajouter au DOM
+}
