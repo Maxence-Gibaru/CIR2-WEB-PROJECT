@@ -11,7 +11,7 @@ fetch('/api/session')
     /* let userDiv = document.querySelector(".user-info"); */
     let userMail = document.querySelector(".user-mail");
     let userName = document.querySelector(".user-name");
-    userName.textContent = "Maxence GIBARU";
+    userName.textContent = "User Name ?";
     /* let userPsw = document.querySelector(".user-psw"); */
     userMail.textContent = data.user.email;
     /* userPsw.textContent = data.user.password; */

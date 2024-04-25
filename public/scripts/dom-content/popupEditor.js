@@ -3,6 +3,7 @@ const bodyElement = document.body;
 function createOverlay() {
   let backgroundOverlay = document.createElement("div");
   backgroundOverlay.className = "background-overlay";
+
   document.body.appendChild(backgroundOverlay);
 
   return backgroundOverlay;
@@ -12,6 +13,7 @@ export function createPopupWindow() {
   let popupWindow = document.createElement("div");
   popupWindow.className = "popup-window";
 
+  
   let backgroundOverlay = createOverlay();
 
   backgroundOverlay.addEventListener("click", () => {
@@ -27,5 +29,9 @@ export function createSubTaskEditor(name, popupWindow) {
   taskName.className = "popup-title";
   taskName.textContent = name;
 
+  let subTaskSettings = document.createElement("div");
+  subTaskSettings.className = "popup-settings";
+
+  popupWindow.appendChild(subTaskSettings)
   popupWindow.appendChild(taskName);
 }
