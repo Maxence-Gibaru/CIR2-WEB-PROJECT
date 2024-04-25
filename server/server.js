@@ -5,6 +5,9 @@ const session = require('express-session');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const multer = require('multer');
+const storage = multer.memoryStorage(); // Stocker les fichiers en mémoire
+const upload = multer({ storage: storage });
 
 app.use(express.static("../public"));
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
@@ -49,7 +52,6 @@ mongoose
     firstName: String,
     lastName: String,
     mobileNumber: Number,
-    profileImage: String,
     colorPreference: String,
   });
   
@@ -166,7 +168,7 @@ app.get('/', (req, res) => {
 
 
 app.post('/api/profiles/update', async (req, res) => {
-  const {email,firstName, lastName, mobileNumber } = req.body;
+  const {email,firstName, lastName, mobileNumber,color} = req.body;
 
   try {
     // Trouver le profil utilisateur correspondant à l'email
@@ -176,10 +178,10 @@ app.post('/api/profiles/update', async (req, res) => {
       return res.status(404).json({ message: 'Profile not found' });
     }
 
-    // Mettre à jour les informations du profil
     profile.firstName = firstName;
     profile.lastName = lastName;
     profile.mobileNumber = mobileNumber;
+    profile.colorPreference = color;
 
     // Sauvegarder les modifications dans la base de données
     await profile.save();
@@ -209,6 +211,9 @@ app.get('/api/profiles/:email', async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch profile' });
   }
 });
+
+
+
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');

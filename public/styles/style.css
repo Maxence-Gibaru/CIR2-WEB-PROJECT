@@ -799,3 +799,8 @@ header .calendar-current-date {
   cursor: pointer;
   border: solid 1px #BA68C8
 }
+
+#saveProfile button {
+  background-color: var(--main-color);
+  border: var(--main-color);
+}
