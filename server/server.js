@@ -49,7 +49,8 @@ mongoose
     firstName: String,
     lastName: String,
     age: Number,
-    profileImage: String 
+    profileImage: String,
+    colorPreference: String,
   });
   
   const Profile = mongoose.model('profiles', ProfileSchema); // Modifier le nom du modèle
