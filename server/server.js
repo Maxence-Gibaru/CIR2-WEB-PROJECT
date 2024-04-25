@@ -48,7 +48,7 @@ mongoose
     email: String,
     firstName: String,
     lastName: String,
-    age: Number,
+    mobileNumber: Number,
     profileImage: String,
     colorPreference: String,
   });
@@ -64,34 +64,7 @@ mongoose
   
   const User = mongoose.model('User', UserSchema);
   
-  app.post('/api/profiles', async (req, res) => {
-    const { email, firstName, lastName, age } = req.body;
-  
-    try {
-      let profile = await Profile.findOne({ email });
-  
-      if (!profile) {
-        profile = new Profile({
-          email,
-          firstName,
-          lastName,
-          age
-        });
-      } else {
-        profile.firstName = firstName;
-        profile.lastName = lastName;
-        profile.age = age;
-      }
-  
-      await profile.save();
-      await User.findOneAndUpdate({ email }, { profiles: profile._id }); // Mettre à jour le champ profiles
-  
-      res.status(200).json({ message: 'Profile updated successfully' });
-    } catch (error) {
-      console.error('Error updating profile:', error);
-      res.status(500).json({ message: 'Failed to update profile' });
-    }
-  });
+ 
   
   app.post('/api/signup', async (req, res) => {
     const { username, email, password } = req.body;
@@ -188,6 +161,56 @@ app.get('/', (req, res) => {
   }
 });
 
+
+
+
+
+app.post('/api/profiles/update', async (req, res) => {
+  const {email,firstName, lastName, mobileNumber } = req.body;
+
+  try {
+    // Trouver le profil utilisateur correspondant à l'email
+    let profile = await Profile.findOne({ email });
+
+    if (!profile) {
+      return res.status(404).json({ message: 'Profile not found' });
+    }
+
+    // Mettre à jour les informations du profil
+    profile.firstName = firstName;
+    profile.lastName = lastName;
+    profile.mobileNumber = mobileNumber;
+
+    // Sauvegarder les modifications dans la base de données
+    await profile.save();
+
+    // Envoyer une réponse indiquant que la mise à jour a réussi
+    res.status(200).json({ message: 'Profile updated successfully' });
+  } catch (error) {
+    // Envoyer une réponse en cas d'erreur
+    console.error('Error updating profile:', error);
+    res.status(500).json({ message: 'Failed to update profile' });
+  }
+});
+
+app.get('/api/profiles/:email', async (req, res) => {
+  const email = req.params.email;
+  console.log(email);
+  try {
+    const profile = await Profile.findOne({ email });
+    console.log(profile);
+    if (!profile) {
+      return res.status(404).json({ message: 'Profile not found' });
+    }
+
+    res.status(200).json(profile);
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    res.status(500).json({ message: 'Failed to fetch profile' });
+  }
+});
+
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
+
