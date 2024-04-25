@@ -122,14 +122,15 @@
                     <h4 class="text-right">Profile Settings</h4>
                   </div>
                   <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control"
-                        placeholder="first name" value=""></div>
-                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control"
-                        value="" placeholder="surname"></div>
+                    <div class="col-md-6"><label class="labels">Name</label>
+                      <input type="text" class="form-control" placeholder="first name" name="firstName" value="">
+                    </div>
+                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" placeholder="surname" name="lastName" value="">
+                      </div>
                   </div>
                   <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text"
-                        class="form-control" placeholder="enter phone number" value=""></div>
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" name="mobileNumber" value="">
+                    </div>
 
                   </div>
                   <div class="row mt-3">
@@ -143,6 +144,7 @@
                   </div>
                 </div>
               </div>
+            
               <!--   <div class="col-md-4">
                 <div class="p-3 py-5">
                   <div class="d-flex justify-content-between align-items-center experience"><span>Edit
@@ -193,6 +195,84 @@
   <!-- Bootstrap JS -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>
+
+    
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+  const saveProfileButton = document.querySelector('#saveProfile');
+
+  saveProfileButton.addEventListener('click', function() {
+    const firstNameInputs = document.querySelectorAll('input[name="firstName"]');
+    const lastNameInputs = document.querySelectorAll('input[name="lastName"]');
+    const mobileNumberInputs = document.querySelectorAll('input[name="mobileNumber"]');
+    
+    // Récupérer les valeurs des champs
+    const firstName = firstNameInputs[0].value;
+    const lastName = lastNameInputs[0].value;
+    const mobileNumber = mobileNumberInputs[0].value;
+    const email = document.querySelector('.user-mail').textContent;
+
+    // Envoyer les données au serveur
+    fetch('/api/profiles/update', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        mobileNumber: mobileNumber,
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data.message); 
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Gérer les erreurs
+    });
+  });
+});
+
+    </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch('/api/session') 
+    .then(response => response.json())
+    .then(data => {
+      const userEmail = data.user.email;
+      console.log('User email:', userEmail);
+      fetch(`/api/profiles/${userEmail}`)
+        .then(response => response.json())
+        .then(profile => {
+          console.log('Profile:', profile);
+          // Pré-remplir les champs de formulaire avec les données du profil
+          const firstNameInputs = document.querySelectorAll('input[name="firstName"]');
+          const lastNameInputs = document.querySelectorAll('input[name="lastName"]');
+          const mobileNumberInputs = document.querySelectorAll('input[name="mobileNumber"]');
+          
+          firstNameInputs[0].value = profile.firstName;
+          lastNameInputs[0].value = profile.lastName;
+          mobileNumberInputs[0].value = profile.mobileNumber;
+        })
+        .catch(error => {
+          console.error('Error fetching profile:', error);
+        });
+      })
+  .catch(error => {
+    console.error('Error checking session:', error);
+  });
+    });
+  </script>
+
 
 
 </body>
