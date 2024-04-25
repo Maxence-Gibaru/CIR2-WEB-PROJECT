@@ -5,9 +5,6 @@ const session = require('express-session');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const multer = require('multer');
-const storage = multer.memoryStorage(); // Stocker les fichiers en mémoire
-const upload = multer({ storage: storage });
 
 app.use(express.static("../public"));
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
