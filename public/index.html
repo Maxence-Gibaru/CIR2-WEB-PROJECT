@@ -204,9 +204,12 @@
     const firstName = firstNameInputs[0].value;
     const lastName = lastNameInputs[0].value;
     const mobileNumber = mobileNumberInputs[0].value;
-    const email = document.querySelector('.user-mail').textContent;
-
-    // Envoyer les données au serveur
+    
+    // Récupérer l'email de l'utilisateur connecté
+    fetch('/api/session')
+    .then(response => response.json())
+    .then(data => {
+      const email = data.user.email;
     fetch('/api/profiles/update', {
       method: 'POST',
       headers: {
@@ -230,9 +233,10 @@
     })
     .catch(error => {
       console.error('Error:', error);
-      // Gérer les erreurs
     });
+  })
   });
+
 });
 
     </script>
