@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  color: #fff;
+  font-family: monospace;
+  font-size: 5vw;
+  font-weight: bold;
+  text-align: center;
+}
+
+html {
+  height: 100vh;
+  padding: 50px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html::before {
+  content: "!! Stop !!";
+}
+
+body {
+  display: none !important;
+}

@@ -137,7 +137,7 @@ export class Task {
   }
 }
 
-function handleDate() {
+/* function handleDate() {
   let buttonFilter = createButton("date-picker", "Today", () => {
     let calendarContainer = document.querySelector(".calendar-container");
     calendarContainer.style.display =
@@ -148,7 +148,7 @@ function handleDate() {
   });
   buttonFilter.classList.add = "reset";
   document.querySelector(".task-filter").appendChild(buttonFilter);
-}
+} */
 
 
 // à développer plus tard
@@ -160,8 +160,8 @@ function handleDate() {
 
   return taskElement;
 } */
-
-handleDate();
+/* 
+handleDate(); */
 
 // Fonction pour initialiser une tâche
 function toggleTaskCreationForm() {

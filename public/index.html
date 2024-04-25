@@ -13,17 +13,9 @@
   <script src="scripts/loginSys.js">
   </script>
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
-  <script>
 
-    document.addEventListener('DOMContentLoaded', function () {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth'
-      });
-      calendar.render();
-    });
+  <script type="module" src="scripts/calendar-ui.js"></script>
 
-  </script>
 
 </head>
 
@@ -164,9 +156,29 @@
 
             </div>
           </div>
+        </section>
+        <section style="overflow-y: scroll;" id="calendar" class="widget">
+          <style>
+            .col {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-evenly;
+            }
+          </style>
+          <div class="calendar-ui-container">
+            <div class="col">
+
+            </div>
+          </div>
+        </section>
       </div>
+
+
     </div>
-    </section>
+
+
+  </div>
+
   </div>
   </div>
   </div>
@@ -185,6 +197,7 @@
   <script type="module" src="scripts/data.js"></script>
   <script type="module" src="scripts/task.js"></script>
   <script src="scripts/calendar.js"></script>
+
 
   <!-- Project System -->
   <script type="module" src="scripts/project.js"></script>

@@ -93,7 +93,6 @@ body {
   font-size: 30px;
   font-weight: 1000;
   margin-bottom: 0;
-
 }
 
 .sidebar-container {
@@ -187,15 +186,12 @@ body {
 .account-container {
   display: flex;
   flex-direction: row;
-
 }
 
 .user-info {
   display: flex;
   flex-direction: column;
 }
-
-
 
 #account {
   width: 100%;
@@ -294,15 +290,12 @@ body {
   text-align: center;
 }
 
-
 #pomodoro p {
   font-size: 32px;
   color: #333;
   margin: 0 0 25px 0;
   font-weight: bold;
 }
-
-
 
 #pomodoro .control-buttons button {
   padding: 16px 26px;
@@ -338,9 +331,7 @@ body {
   border-radius: 50%;
   border: 5px solid var(--main-color);
   position: relative;
-
 }
-
 
 .time-adjust {
   background-color: var(--main-color);
@@ -360,19 +351,16 @@ body {
 
 #decrementButton {
   transform: translateX(-185%) translateY(20%);
-
 }
 
 #incrementButton {
   transform: translateX(185%) translateY(20%);
 }
 
-
 .timer-display {
   font-size: 2em;
   color: var(--main-color);
   z-index: 1;
-
 }
 
 .selection-buttons {
@@ -609,7 +597,6 @@ p {
   background-position: center;
   background-size: cover; */
 
-
 /* CALENDAR */
 
 /* fallback */
@@ -617,7 +604,8 @@ p {
   font-family: "Material Symbols Rounded";
   font-style: normal;
   font-weight: 100 700;
-  src: url(https://fonts.gstatic.com/s/materialsymbolsrounded/v168/sykg-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190Fjzag.woff2) format("woff2");
+  src: url(https://fonts.gstatic.com/s/materialsymbolsrounded/v168/sykg-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190Fjzag.woff2)
+    format("woff2");
 }
 
 .material-symbols-rounded {
@@ -766,43 +754,43 @@ header .calendar-current-date {
 
 .form-control:focus {
   box-shadow: none;
-  border-color: #BA68C8
+  border-color: #ba68c8;
 }
 
 .profile-button {
   background: rgb(99, 39, 120);
   box-shadow: none;
-  border: none
+  border: none;
 }
 
 .profile-button:hover {
-  background: #682773
+  background: #682773;
 }
 
 .profile-button:focus {
   background: #682773;
-  box-shadow: none
+  box-shadow: none;
 }
 
 .profile-button:active {
   background: #682773;
-  box-shadow: none
+  box-shadow: none;
 }
 
 .back:hover {
   color: #682773;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .labels {
-  font-size: 11px
+  font-size: 11px;
 }
 
 .add-experience:hover {
-  background: #BA68C8;
+  background: #ba68c8;
   color: #fff;
   cursor: pointer;
-  border: solid 1px #BA68C8
+  border: solid 1px #ba68c8;
 }
 
 .popup-markdown-description {
@@ -817,4 +805,12 @@ header .calendar-current-date {
 #saveProfile button {
   background-color: var(--main-color);
   border: var(--main-color);
+}
+
+#calendar a {
+  color: var(--main-color);
+}
+
+#calendar button {
+  background-color: var(--main-color);
 }

@@ -1,4 +1,5 @@
 import { Task, editorButton } from "./task.js";
+import { calendar } from "./calendar-ui.js";
 
 export function saveTasks(newTask) {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -27,6 +28,12 @@ export function loadTasks() {
       task.subTasks,
       task.id
     );
+
+    calendar.addEvent({
+      title: task.name,
+      start: '2024-04-25',
+      allDay: true
+    })
 
 
     var wrapperTask = document.querySelector(".wrapper-task");

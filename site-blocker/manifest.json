@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Site Blocker",
+  "version": "1.0.0",
+  "description": "A basic example extension with only required keys",
+  "icons": {},
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*",
+        "https://www.netflix.com/*",
+        "https://www.instagram.com/"
+      ],
+      "css": [
+        "css/style.css"
+      ]
+    }
+  ]
+}

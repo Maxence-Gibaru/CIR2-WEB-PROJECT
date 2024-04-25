@@ -1,6 +1,8 @@
 import { Task, editorButton } from "../task.js";
 import { createPopupWindow, createSubTaskEditor } from "./popupEditor.js";
 import { hashCode } from "../utils.js";
+import { calendar } from "../calendar-ui.js";
+
 
 // Fonction pour créer un imput
 export function createInputTask() {
@@ -73,6 +75,12 @@ export function createTaskForm(parentTask = null, isSubtask = false) {
           hashCode(`${taskName}-${Date.now()}`).toString()
         );
         newTask.createTaskNode(wrapperTask, editorButton);
+
+        calendar.addEvent({
+          title: newTask.name,
+          start: "2024-04-25",
+          allDay: true,
+        })
         /* console.log(JSON.stringify(newTask)) */
       }
       taskElement.remove();
@@ -154,6 +162,11 @@ export function createTaskForm(parentTask = null, isSubtask = false) {
         hashCode(`${taskName}-${Date.now()}`).toString()
       );
       newTask.createTaskNode(wrapperTask, editorButton);
+      calendar.addEvent({
+        title: newTask.name,
+        start: "2024-04-25",
+        allDay: true,
+      })
     }
     taskElement.remove();
   });
