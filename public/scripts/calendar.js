@@ -51,8 +51,8 @@ const manipulate = () => {
     // Check if the current date is today
     let isToday =
       i === date.getDate() &&
-      month === new Date().getMonth() &&
-      year === new Date().getFullYear()
+        month === new Date().getMonth() &&
+        year === new Date().getFullYear()
         ? "active"
         : "";
     lit += `<li class="${isToday}">${i}</li>`;
@@ -111,4 +111,24 @@ prenexIcons.forEach((icon) => {
     // update the calendar display
     manipulate();
   });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth', // Vue par mois avec les jours
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    events: [
+      // Ici, vous chargerez vos tâches
+      // { title: 'Task 1', start: '2024-04-01' },
+      // { title: 'Task 2', start: '2024-04-02' }
+    ]
+    // Vous pouvez ajouter d'autres options ici selon vos besoins
+  });
+  calendar.render();
 });

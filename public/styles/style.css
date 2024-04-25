@@ -597,7 +597,7 @@ p {
   position: relative;
 }
 
-.sidebar-account::before {
+/* .sidebar-account::before {
   content: " ";
   position: absolute;
   top: -235%;
@@ -608,7 +608,7 @@ p {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover; */
-}
+
 
 /* CALENDAR */
 
