@@ -165,10 +165,11 @@ export function createTaskPanel(taskObject, taskNode) {
   taskObject.subTasks.forEach((t) => { addSubtaskToUI(t, popupWindow) });
 
   let subTaskButtonContainer = document.createElement("div");
+  subTaskButtonContainer.className = "sub-button-container";
   let adderSubTask = createButton("adder-task", "Add a subtask", () => {
     adderSubTask.style.display = "none";
     let subTaskForm = createTaskForm(taskObject, true);
-    popupWindow.appendChild(subTaskForm);
+    popupWindow.insertBefore(subTaskForm, popupWindow.querySelector(".wrapper-task"));
   });
 
   /* const taskIndex = tasks.findIndex((task) => task.name === taskName);
