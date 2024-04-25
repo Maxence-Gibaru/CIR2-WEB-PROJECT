@@ -1,7 +1,7 @@
 :root {
   --blue-color: #7f7aee;
   --grey-line: #e3e8ee;
-  --window-bg: #f8f9fa; 
+  --window-bg: #f8f9fa;
 }
 
 * {
@@ -154,7 +154,6 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: flex-start;
   width: 100%;
 }
 
@@ -165,6 +164,23 @@ body {
   flex: 1 1 48%;
   padding: 20px;
   max-height: 400px;
+}
+
+.account-container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+#account {
+  width: 100%;
 }
 
 .task {
@@ -559,10 +575,10 @@ p {
   left: 5%;
   width: 200px;
   height: 200px;
-  background-image: url("../assets/images/dash-illus.jpg");
+  /* background-image: url("../assets/images/dash-illus.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: cover; */
 }
 
 /* CALENDAR */
@@ -717,4 +733,45 @@ header .calendar-current-date {
 
 .hidden {
   display: none;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #BA68C8
+}
+
+.profile-button {
+  background: rgb(99, 39, 120);
+  box-shadow: none;
+  border: none
+}
+
+.profile-button:hover {
+  background: #682773
+}
+
+.profile-button:focus {
+  background: #682773;
+  box-shadow: none
+}
+
+.profile-button:active {
+  background: #682773;
+  box-shadow: none
+}
+
+.back:hover {
+  color: #682773;
+  cursor: pointer
+}
+
+.labels {
+  font-size: 11px
+}
+
+.add-experience:hover {
+  background: #BA68C8;
+  color: #fff;
+  cursor: pointer;
+  border: solid 1px #BA68C8
 }
