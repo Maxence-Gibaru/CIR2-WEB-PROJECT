@@ -57,15 +57,12 @@ document.addEventListener("DOMContentLoaded", function() {
         const lastNameInputs = document.querySelectorAll('input[name="lastName"]');
         const mobileNumberInputs = document.querySelectorAll('input[name="mobileNumber"]');
         const colorPick = document.querySelector('#colorPicker');
-        
-        
+        firstNameInputs[0].value = profile.firstName ? profile.firstName : '';
+        lastNameInputs[0].value = profile.lastName ? profile.lastName : '';
+        mobileNumberInputs[0].value = profile.mobileNumber ? profile.mobileNumber : '';
+        colorPick.value = profile.colorPreference ? profile.colorPreference : '#000000';
 
-        firstNameInputs[0].value = profile.firstName;
-        lastNameInputs[0].value = profile.lastName;
-        mobileNumberInputs[0].value = profile.mobileNumber;
-        colorPick.value = profile.colorPreference;
-
-        document.documentElement.style.setProperty('--main-color', profile.colorPreference);
+        document.documentElement.style.setProperty('--main-color', profile.colorPreference ? profile.colorPreference : '#000000');
         })
         .catch(error => {
         console.error('Error fetching profile:', error);
