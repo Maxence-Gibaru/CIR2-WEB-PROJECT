@@ -813,3 +813,8 @@ header .calendar-current-date {
   border: 1px solid var(--grey-line);
   margin: 20px;
 }
+
+#saveProfile button {
+  background-color: var(--main-color);
+  border: var(--main-color);
+}
