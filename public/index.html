@@ -247,7 +247,6 @@
     .then(response => response.json())
     .then(data => {
       const userEmail = data.user.email;
-      console.log('User email:', userEmail);
       fetch(`/api/profiles/${userEmail}`)
         .then(response => response.json())
         .then(profile => {
@@ -270,9 +269,6 @@
   });
     });
   </script>
-
-
-
 </body>
 
 </html>
