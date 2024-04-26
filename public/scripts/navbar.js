@@ -1,19 +1,23 @@
-// Sélectionnez tous les liens de la barre de navigation
+// Select all links in the navigation bar
 const navLinks = document.querySelectorAll(".sidebar a");
 
-// Parcourez chaque lien de la barre de navigation
+// Iterate over each link in the navigation bar
 navLinks.forEach((link) => {
-  // Ajoutez un gestionnaire d'événements de clic à chaque lien
+  // Add a click event handler to each link
   link.addEventListener("click", (event) => {
-    // Empêchez le comportement par défaut du lien (naviguer vers une nouvelle page)
+    // Prevent the default behavior of the link (navigating to a new page)
     event.preventDefault();
 
-    // Obtenez l'identifiant de la section à afficher à partir de l'attribut href du lien
+    // Get the ID of the section to display from the link's href attribute
     const targetId = link.getAttribute("href").substring(1);
 
-    // Masquez toutes les sections de contenu
+    // Hide all content sections
     const allSections = document.querySelectorAll(".widget-container section");
+    allSections.forEach((section) => {
+      section.style.display = "none";
+    });
 
+    // Display specific content sections based on the clicked link
     if (targetId != "dashboard") {
       allSections.forEach((section) => {
         section.style.display = "none";
@@ -29,7 +33,7 @@ navLinks.forEach((link) => {
       });
     }
 
-    // Affichez la section de contenu correspondant à l'onglet sélectionné
+    // Display the content section corresponding to the selected tab
     const targetSection = document.getElementById(targetId);
     if (targetSection) {
       targetSection.style.display = "block";
