@@ -6,11 +6,19 @@ const session = require('express-session');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Serve static files from the "public" directory
 app.use(express.static("../public"));
+
+// Enable CORS with options for allowing requests from http://localhost:3000
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+
+// Enable CORS middleware
 app.use(cors());
+
+// Parse JSON bodies
 app.use(express.json());
 
+// Set headers to allow cross-origin requests
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -19,23 +27,25 @@ app.use((req, res, next) => {
   next();
 });
 
+// Set up session middleware
 app.use(
   session({
     secret: 'e3828452f04c15b4a749a4bad02573d52bfac09a280ec05300e8f68748f1d608y',
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: false, 
-      maxAge: 86400000,
+      secure: false, // Not using HTTPS
+      maxAge: 86400000, // Cookie expiration time (1 day)
     },
   })
 );
 
+// Connect to MongoDB Atlas database
 mongoose
   .connect('mongodb+srv://ugowarem:Q7TT52ivN8fncVle@cluster0.xe28aee.mongodb.net/mydatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: 'test',
+    dbName: 'test', // Specify the database name
   })
   .then(() => {
     console.log('Connected to MongoDB Atlas');
@@ -44,59 +54,66 @@ mongoose
     console.log('MongoDB Atlas connection error:', error);
   });
 
-  const ProfileSchema = new mongoose.Schema({
-    email: String,
-    firstName: String,
-    lastName: String,
-    mobileNumber: Number,
-    colorPreference: String,
-  });
-  
-  const Profile = mongoose.model('profiles', ProfileSchema); // Modifier le nom du modèle
-  
-  const UserSchema = new mongoose.Schema({
-    username: String,
-    email: String,
-    password: String,
-    profiles: { type: mongoose.Schema.Types.ObjectId, ref: 'profiles' } // Modifier la référence du schéma
-  });
-  
-  const User = mongoose.model('User', UserSchema);
-  
- 
-  
-  app.post('/api/signup', async (req, res) => {
-    const { username, email, password } = req.body;
-  
-    try {
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return res.status(400).send('User with this email already exists');
-      }
-  
-      const newUser = new User({
-        username,
-        email,
-        password,
-      });
-  
-      await newUser.save();
-    
-      const newProfile = new Profile({
-        email: email,
-      });
-  
-      await newProfile.save();
-      newUser.profiles = newProfile._id;
-      await newUser.save();
-  
-      req.session.user = newUser;
-      res.send('Signup successful');
-    } catch (error) {
-      res.status(500).send('Signup failed');
-    }
-  });
+// Define the Profile schema
+const ProfileSchema = new mongoose.Schema({
+  email: String,
+  firstName: String,
+  lastName: String,
+  mobileNumber: Number,
+  colorPreference: String,
+});
 
+// Create a model for Profile using the schema
+const Profile = mongoose.model('profiles', ProfileSchema);
+
+// Define the User schema
+const UserSchema = new mongoose.Schema({
+  username: String,
+  email: String,
+  password: String,
+  profiles: { type: mongoose.Schema.Types.ObjectId, ref: 'profiles' } // Reference the Profile schema
+});
+
+// Create a model for User using the schema
+const User = mongoose.model('User', UserSchema);
+
+// Handle user signup
+app.post('/api/signup', async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).send('User with this email already exists');
+    }
+
+    // Create a new user
+    const newUser = new User({
+      username,
+      email,
+      password,
+    });
+
+    await newUser.save();
+  
+    // Create a new profile associated with the user
+    const newProfile = new Profile({
+      email: email,
+    });
+
+    await newProfile.save();
+    newUser.profiles = newProfile._id;
+    await newUser.save();
+
+    // Set session data for the new user
+    req.session.user = newUser;
+    res.send('Signup successful');
+  } catch (error) {
+    res.status(500).send('Signup failed');
+  }
+});
+
+// Handle user login
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -109,6 +126,7 @@ app.post('/api/login', async (req, res) => {
     }
 
     if (user.password === password) {
+      // Set session data for the logged-in user
       req.session.user = user;
       req.session.email = user.email;
       const sessionId = req.session.id;
@@ -129,6 +147,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Check session status
 app.get('/api/session', (req, res) => {
   if (req.session.user) {
     res.status(200).json({ loggedIn: true, user: req.session.user });
@@ -141,6 +160,7 @@ app.get('/api/session', (req, res) => {
   }
 });
 
+// Handle user logout
 app.get('/api/logout', (req, res) => {
   req.session.destroy((err) => {
       if (err) {
@@ -152,6 +172,7 @@ app.get('/api/logout', (req, res) => {
   });
 });
 
+// Serve index.html if user is logged in
 app.get('/', (req, res) => {
   if (req.session.user) {
       res.sendFile(__dirname + '/index.html');
@@ -160,44 +181,42 @@ app.get('/', (req, res) => {
   }
 });
 
-
-
-
-
+// Update user profile
 app.post('/api/profiles/update', async (req, res) => {
-  const {email,firstName, lastName, mobileNumber,color} = req.body;
+  const { email, firstName, lastName, mobileNumber, color } = req.body;
 
   try {
-    // Trouver le profil utilisateur correspondant à l'email
+    // Find the user profile based on email
     let profile = await Profile.findOne({ email });
 
     if (!profile) {
       return res.status(404).json({ message: 'Profile not found' });
     }
 
+    // Update profile fields
     profile.firstName = firstName;
     profile.lastName = lastName;
     profile.mobileNumber = mobileNumber;
     profile.colorPreference = color;
 
-    // Sauvegarder les modifications dans la base de données
+    // Save the changes to the database
     await profile.save();
 
-    // Envoyer une réponse indiquant que la mise à jour a réussi
+    // Send response indicating successful update
     res.status(200).json({ message: 'Profile updated successfully' });
   } catch (error) {
-    // Envoyer une réponse en cas d'erreur
+    // Send response in case of error
     console.error('Error updating profile:', error);
     res.status(500).json({ message: 'Failed to update profile' });
   }
 });
 
+// Fetch user profile by email
 app.get('/api/profiles/:email', async (req, res) => {
   const email = req.params.email;
-  console.log(email);
+
   try {
     const profile = await Profile.findOne({ email });
-    console.log(profile);
     if (!profile) {
       return res.status(404).json({ message: 'Profile not found' });
     }
@@ -209,10 +228,7 @@ app.get('/api/profiles/:email', async (req, res) => {
   }
 });
 
-
-
-
+// Start the server
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
-
