@@ -2,77 +2,47 @@ let date = new Date();
 let year = date.getFullYear();
 let month = date.getMonth();
 
+// DOM elements
 const day = document.querySelector(".calendar-dates");
-
 const currdate = document.querySelector(".calendar-current-date");
-
 const prenexIcons = document.querySelectorAll(".calendar-navigation span");
 
 // Array of month names
 export const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
 ];
 
-// Function to generate the calendar
+// Function to manipulate calendar dates
 const manipulate = () => {
-  // Get the first day of the month
   let dayone = new Date(year, month, 1).getDay();
-
-  // Get the last date of the month
   let lastdate = new Date(year, month + 1, 0).getDate();
-
-  // Get the day of the last date of the month
   let dayend = new Date(year, month, lastdate).getDay();
-
-  // Get the last date of the previous month
   let monthlastdate = new Date(year, month, 0).getDate();
 
-  // Variable to store the generated calendar HTML
   let lit = "";
-
-  // Loop to add the last dates of the previous month
+  // Previous month dates
   for (let i = dayone; i > 0; i--) {
     lit += `<li class="inactive">${monthlastdate - i + 1}</li>`;
   }
-
-  // Loop to add the dates of the current month
+  // Current month dates
   for (let i = 1; i <= lastdate; i++) {
-    // Check if the current date is today
-    let isToday =
-      i === date.getDate() &&
-        month === new Date().getMonth() &&
-        year === new Date().getFullYear()
-        ? "active"
-        : "";
+    let isToday = (i === date.getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) ? "active" : "";
     lit += `<li class="${isToday}">${i}</li>`;
   }
-
-  // Loop to add the first dates of the next month
+  // Next month dates
   for (let i = dayend; i < 6; i++) {
     lit += `<li class="inactive">${i - dayend + 1}</li>`;
   }
 
-  // Update the text of the current date element
-  // with the formatted current month and year
+  // Update current date display
   currdate.innerText = `${months[month]} ${year}`;
 
-  // update the HTML of the dates element
-  // with the generated calendar
+  // Update calendar dates
   day.innerHTML = lit;
 
+  // Add event listeners to each day
   let days = day.querySelectorAll("li");
-
   days.forEach((myDay) => {
     myDay.addEventListener("click", () => {
       var selectedDate = [myDay.innerHTML, months[month], year];
@@ -81,54 +51,24 @@ const manipulate = () => {
   });
 };
 
+// Initial rendering
 manipulate();
 
-// Attach a click event listener to each icon
+// Event listeners for navigation icons
 prenexIcons.forEach((icon) => {
-  // When an icon is clicked
   icon.addEventListener("click", () => {
-    // Check if the icon is "calendar-prev"
-    // or "calendar-next"
     month = icon.id === "calendar-prev" ? month - 1 : month + 1;
 
     // Check if the month is out of range
     if (month < 0 || month > 11) {
-      // Set the date to the first day of the
-      // month with the new year
       date = new Date(year, month, new Date().getDate());
-
-      // Set the year to the new year
       year = date.getFullYear();
-
-      // Set the month to the new month
       month = date.getMonth();
     } else {
-      // Set the date to the current date
       date = new Date();
     }
 
-    // Call the manipulate function to
-    // update the calendar display
+    // Re-render calendar
     manipulate();
   });
 });
-
-/* document.addEventListener('DOMContentLoaded', function () {
-  var calendarEl = document.getElementById('calendar');
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth', // Vue par mois avec les jours
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
-    events: [
-      // Ici, vous chargerez vos tâches
-      // { title: 'Task 1', start: '2024-04-01' },
-      // { title: 'Task 2', start: '2024-04-02' }
-    ]
-    // Vous pouvez ajouter d'autres options ici selon vos besoins
-  });
-  calendar.render();
-});
- */
