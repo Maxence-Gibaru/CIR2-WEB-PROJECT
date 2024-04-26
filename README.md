@@ -51,6 +51,6 @@ This project is a productivity dashboard developed using HTML, CSS, JavaScript, 
 - [Ugo WAREMBOURG](maxence.gibaru@student.junia.com)
 - [Mohamad OWEIDAT](mohamad.oweidat@student.junia.com)
 
-## License
+## VIDEO
 
-This project is licensed under the [MIT License](LICENSE).
+![Miniature TEASER NEURON](/public/assets/images/miniatures "Minia Neuron")
