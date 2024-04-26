@@ -1,15 +1,17 @@
 import { createButton } from "./dom-content/elementCreator.js";
 
+// Function to pad single digit numbers with a leading zero
 function pad(number) {
   return number < 10 ? "0" + number : number;
 }
 
+// DOM elements
 let timerDisplay = document.getElementById("timerDisplay");
-let isWorkSession = true;
-let workDuration = 25;
+let controlButtons = document.querySelector(".control-buttons");
 
+// Timer object
 let time = {
-  minutes: workDuration,
+  minutes: 25,
   secondes: 0,
   timer: null,
   displayTime: function () {
@@ -62,8 +64,13 @@ let time = {
     this.displayTime();
   },
 };
-let controlButtons = document.querySelector(".control-buttons");
 
+// Initial setup
+let isWorkSession = true;
+let workDuration = 25;
+time.displayTime();
+
+// Create start/stop button
 let pomodoroButton = createButton("startButton", "Start", () => {
   if (time.timer === null) {
     pomodoroButton.textContent = "Stop";
@@ -76,8 +83,10 @@ let pomodoroButton = createButton("startButton", "Start", () => {
   }
 });
 
+// Add start/stop button to control buttons container
 controlButtons.appendChild(pomodoroButton);
 
+// Event listener for decrement button
 document.getElementById("decrementButton").addEventListener("click", () => {
   if (time.minutes > 1 || (time.minutes === 1 && time.secondes > 0)) {
     time.stop();
@@ -86,10 +95,9 @@ document.getElementById("decrementButton").addEventListener("click", () => {
   }
 });
 
+// Event listener for increment button
 document.getElementById("incrementButton").addEventListener("click", () => {
   time.stop();
   time.setTime(time.minutes + 1, 0);
   workDuration = time.minutes;
 });
-
-time.displayTime();
