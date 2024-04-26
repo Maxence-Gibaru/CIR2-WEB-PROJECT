@@ -1,5 +1,7 @@
 # Productivity Web Application
 
+![Junia Banner](/assets/junia_banner.jpeg "Junia Banner")
+
 ## Description
 
 This project is a productivity dashboard developed using HTML, CSS, JavaScript, and Node.js. It provides users with features to enhance their productivity, including task management, time tracking, personalization options, and a productivity-blocking browser extension.
