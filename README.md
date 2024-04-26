@@ -49,6 +49,7 @@ This project is a productivity dashboard developed using HTML, CSS, JavaScript, 
 
 - [Maxence GIBARU](maxence.gibaru@student.junia.com)
 - [Ugo WAREMBOURG](maxence.gibaru@student.junia.com)
+- [Mohamad OWEIDAT](mohamad.oweidat@student.junia.com)
 
 ## License
 
