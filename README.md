@@ -53,4 +53,4 @@ This project is a productivity dashboard developed using HTML, CSS, JavaScript, 
 
 ## VIDEO
 
-![Miniature TEASER NEURON](/public/assets/images/miniatures "Minia Neuron")
+![Miniature TEASER NEURON](/public/assets/images/miniature.png "Minia Neuron")
