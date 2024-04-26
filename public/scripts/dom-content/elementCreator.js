@@ -3,6 +3,7 @@ import { createPopupWindow, createSubTaskEditor } from "./popupEditor.js";
 import { hashCode } from "../utils.js";
 import { calendar } from "../calendar-ui.js";
 import { months } from "../calendar.js";
+import { saveTasks } from "../data.js";
 
 // Fonction pour créer un imput
 export function createInputTask() {
@@ -21,10 +22,7 @@ export function createButton(className, textContent, clickHandler) {
   return button;
 }
 
-// Cette fonction est un exemple de comment vous pourriez ajouter une sous-tâche à l'UI du popup
-export function addSubtaskToUI(subTask, popupWindow) {
-  subTask.createTaskNode(popupWindow, editorButton);
-}
+
 
 // Fonction pour créer les éléments d'une tâches
 export function createTaskForm(parentTask = null, isSubtask = false) {
@@ -63,6 +61,7 @@ export function createTaskForm(parentTask = null, isSubtask = false) {
               .querySelector(".adder-task"),
             true
           );
+          saveTasks(parentTask);
         }
       } else {
         // Ajoutez une tâche principale comme avant
@@ -166,6 +165,8 @@ export function createTaskForm(parentTask = null, isSubtask = false) {
           document.querySelector(".popup-window").querySelector(".adder-task"),
           true
         );
+
+        saveTasks(parentTask);
       }
     } else {
       let wrapperTask = document.querySelector(".wrapper-task");
@@ -199,7 +200,9 @@ export function createTaskPanel(taskObject, taskNode) {
   document.body.appendChild(popupWindow);
 
   taskObject.subTasks.forEach((t) => {
-    addSubtaskToUI(t, popupWindow);
+
+    let mySubTask = new Task(t.name, t.state, t.date, t.subTasks, t.id, t.isSubTask)
+    mySubTask.createTaskNode(popupWindow, editorButton);
   });
 
   let subTaskButtonContainer = document.createElement("div");

@@ -1,6 +1,5 @@
-import { loadTasks, saveTasks, removeTask } from "./data.js";
+import { loadTasks, saveTasks, removeTask, doneTask } from "./data.js";
 import {
-  addSubtaskToUI,
   createButton,
   createInputTask,
   createTaskForm,
@@ -127,7 +126,7 @@ export class Task {
   checkTask(taskNode) {
     this.state = "done";
     taskNode.remove();
-    saveTasks(this);
+    doneTask(this);
   }
 
   // Function pour delete une task

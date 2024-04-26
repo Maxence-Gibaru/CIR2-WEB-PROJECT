@@ -26,20 +26,23 @@ export function loadTasks() {
       task.state,
       task.date,
       task.subTasks,
-      task.id
+      task.id,
+      task.isSubTask
     );
 
-    calendar.addEvent({
-      title: task.name,
-      start: task.date,
-      allDay: true
-    })
+
 
 
     var wrapperTask = document.querySelector(".wrapper-task");
 
     if (!taskObject.isSubTask) {
       taskObject.createTaskNode(wrapperTask, editorButton);
+
+      calendar.addEvent({
+        title: task.name,
+        start: task.date,
+        allDay: true
+      })
     }
   });
 }
@@ -51,3 +54,25 @@ export function removeTask(task) {
 
   localStorage.setItem("tasks", JSON.stringify(newTasks));
 }
+
+export function doneTask(task) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  var newTasks = tasks.filter((t) => t.id != task.id);
+
+  localStorage.setItem("tasks", JSON.stringify(newTasks));
+  let counterTask = document.querySelector(".task-counter");
+
+
+
+  let myNewCounter = parseInt(counterTask.textContent) + 1;;
+  counterTask.textContent = myNewCounter;
+  localStorage.setItem("counter", parseInt(counterTask.textContent));
+
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("xoxo");
+  let counterTask = document.querySelector(".task-counter");
+  counterTask.textContent = localStorage.getItem("counter");
+})
