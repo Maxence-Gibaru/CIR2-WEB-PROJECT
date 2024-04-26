@@ -1,14 +1,14 @@
 export let calendar;
 
 // Initialize calendar when the DOM content is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Get the calendar element
   var calendarEl = document.getElementById('calendar');
 
   // Create a new FullCalendar instance
   calendar = new FullCalendar.Calendar(calendarEl, {
     // Set the initial view to timeGridWeek
-    initialView: 'timeGridWeek',
+    initialView: 'timeGridDay',
     // Automatically adjust height to avoid overflow
     height: 'auto',
     // Define the header toolbar configuration
