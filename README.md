@@ -1,6 +1,6 @@
 # Productivity Web Application
 
-![Junia Banner](/public/assets/images "Junia Banner")
+![Junia Banner](/public/assets/images/junia_banner.jpeg "Junia Banner")
 
 ## Description
 
