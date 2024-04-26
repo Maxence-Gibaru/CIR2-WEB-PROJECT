@@ -1,43 +1,47 @@
 import { createPopupWindow } from "./dom-content/popupEditor.js";
 
-let bodyElement = document.body;
-
+// DOM elements
+const bodyElement = document.body;
 const buttonAdd = document.querySelector(".project-add");
 
+// Function to save projects to localStorage
 function saveProject(projects) {
   localStorage.setItem("projects", JSON.stringify(projects));
 }
 
+// Function to display the panel for adding a project
 function showPanel() {
   let newPopup = createPopupWindow();
   bodyElement.appendChild(newPopup);
 }
 
+// Function to add a new project
 function addProject() {
   let projectName = document.querySelector(".project-name").value;
-  if (!projectName) return; // Vérifiez si le nom du projet est vide
+  if (!projectName) return; // Check if the project name is empty
 
-  // Charger les projets depuis le stockage local
+  // Load projects from localStorage
   let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
-  // Vérifier si projects est un tableau
+  // Check if projects is an array
   if (!Array.isArray(projects)) {
-    projects = []; // Si ce n'est pas un tableau, initialisez-le comme un tableau vide
+    projects = []; // If it's not an array, initialize it as an empty array
   }
 
-  // Ajouter le nouveau projet à la liste des projets
+  // Add the new project to the projects list
   projects.push(projectName);
 
-  // Enregistrer la liste mise à jour dans localStorage
+  // Save the updated list to localStorage
   saveProject(projects);
 
-  // Afficher le projet nouvellement ajouté
+  // Display the newly added project
   displayProject(projectName);
 
-  // Masquer le panneau et l'overlay
-  hidePanel(projectName);
+  // Hide the panel and the overlay
+  hidePanel();
 }
 
+// Function to display a project
 function displayProject(projectName) {
   let projectContainer = document.querySelector(".project-container");
   let newProjectElement = document.createElement("div");
@@ -45,14 +49,17 @@ function displayProject(projectName) {
   projectContainer.appendChild(newProjectElement);
 }
 
-function hidePanel(projectName) {
+// Function to hide the panel and overlay
+function hidePanel() {
   let projectPanel = document.querySelector(".project-panel");
   let backgroundOverlay = document.querySelector(".background-overlay");
-  projectName.value = "";
+  let projectNameInput = document.querySelector(".project-name");
+  projectNameInput.value = ""; // Clear the project name input field
   projectPanel.style.visibility = "hidden";
   backgroundOverlay.style.display = "none";
 }
 
+// Function to load projects from localStorage and display them
 function loadProjects() {
   const projects = JSON.parse(localStorage.getItem("projects")) || [];
   projects.forEach((project) => {
@@ -60,4 +67,5 @@ function loadProjects() {
   });
 }
 
-/* buttonAdd.addEventListener("click", showPanel); */
+// Event listener for the "Add" button to show the panel for adding a project
+buttonAdd.addEventListener("click", showPanel);
