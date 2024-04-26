@@ -60,4 +60,18 @@ export function doneTask(task) {
   var newTasks = tasks.filter((t) => t.id != task.id);
 
   localStorage.setItem("tasks", JSON.stringify(newTasks));
+  let counterTask = document.querySelector(".task-counter");
+
+
+
+  let myNewCounter = parseInt(counterTask.textContent) + 1;;
+  counterTask.textContent = myNewCounter;
+  localStorage.setItem("counter", parseInt(counterTask.textContent));
+
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("xoxo");
+  let counterTask = document.querySelector(".task-counter");
+  counterTask.textContent = localStorage.getItem("counter");
+})
