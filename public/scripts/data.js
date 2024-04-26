@@ -73,5 +73,7 @@ export function doneTask(task) {
 window.addEventListener("DOMContentLoaded", () => {
   console.log("xoxo");
   let counterTask = document.querySelector(".task-counter");
-  counterTask.textContent = localStorage.getItem("counter");
+  counterTask.textContent = localStorage.getItem("counter") || 0;
 })
+
+localStorage.clear();
