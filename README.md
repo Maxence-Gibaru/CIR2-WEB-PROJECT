@@ -36,7 +36,9 @@ This project is a productivity dashboard developed using HTML, CSS, JavaScript, 
 1. Clone the repository: `git clone <repository-url>`
 2. Install dependencies: `npm install`
 3. Configure MongoDB connection in the application settings.
-4. Run the application: `npm start`
+4. Go to server folder `cd server`
+5. init Node module `npm init`
+6. Run the application: `npm start`
 
 ## Usage
 
